@@ -145,6 +145,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#readonly-properties">"readonly" Properties</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#inheritance">Inheritance</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -689,6 +691,43 @@ accounting.describe();
 const accounting = new Department(&quot;acn&quot;, &quot;Accounting&quot;);
 
 accounting.describe();
+</code></pre>
+
+<h3 id="inheritance">Inheritance</h3>
+<pre><code class="typescript">class Department {
+  private employees: string[] = [];
+
+  constructor(private readonly id: string, public name: string) {}
+
+  describe(this: Department) {
+    console.log(`Deparment (${this.id}): ${this.name}`);
+  }
+
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+
+  printEmployeeInformation() {
+    console.log(this.employees.length);
+    console.log(this.employees);
+  }
+}
+
+class ITDeparment extends Department {
+  constructor(id: string, public admins: string[]) {
+    super(id, &quot;IT&quot;);
+  }
+}
+
+const it = new ITDeparment(&quot;IT1&quot;, [&quot;John&quot;, &quot;Micheal&quot;]);
+
+it.addEmployee(&quot;Amy&quot;);
+it.addEmployee(&quot;Dory&quot;);
+
+it.describe();
+it.printEmployeeInformation();
+
+console.log(it);
 </code></pre>
               
             </div>
