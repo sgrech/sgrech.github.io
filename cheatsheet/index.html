@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Cheatsheet - Env Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Cheatsheet";
+    var mkdocs_page_input_path = "cheatsheet.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Env Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Cheatsheet</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#vim">vim</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#commands">commands</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#key-maps">key maps</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tmux">tmux</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#commands_1">commands</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tmux-commands">tmux commands</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#key-maps_1">key maps</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#git">git</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#commands_2">commands</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#rebase-forked-repo">Rebase forked repo</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#apt">apt</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install">install</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#neovim">neovim</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mkdocs">mkdocs</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install_1">install</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#getting-started">getting started</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vagrant">Vagrant</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#configs">configs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#commands_3">commands</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#virtualbox">VirtualBox</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install_2">Install</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#linux-utils">Linux Utils</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#commands_4">commands</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#push-folders-to-remote-server">Push folders to remote server</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#connect-to-wifi-via-command-line">Connect to wifi via command line</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#change-default-gateway">Change default gateway</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ignore-lid-closed">Ignore lid closed</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#turn-on-keyboard-backlight">Turn on keyboard backlight</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#remove-ssh-entry">Remove ssh entry</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#format-and-bulk-load-json">Format and bulk load json</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#fix-locale-issue">Fix locale issue</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ansible">ansible</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#commands_5">commands</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#php">php</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#snippets">snippets</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#notes">notes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mitmproxy">mitmproxy</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#methods-of-adding-proxy-certificate">Methods of adding proxy certificate</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ansible_1">Ansible</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#docker-alpine">Docker Alpine</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#heroku">heroku</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#commands_6">commands</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#docker">docker</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#commands_7">commands</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ssh">ssh</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../vagrant_tutorial/">Vagrant Tutorial</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../vagrant_recipes/">Vagrant Recipes</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ansible_for_devops/">Ansible For Devops</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../understanding_typescript/">Understanding Typescript</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../iptables/">Iptables</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Env Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Cheatsheet</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="cheatsheet">Cheatsheet</h1>
+<h2 id="vim">vim</h2>
+<h3 id="commands">commands</h3>
+<pre><code class="sh">:tabnew - new tab
+:tabnext - move to next tab
+:tabprev - move to previous tab
+:tabonly - close all tabs except for current one
+:tabclose - close current tab and all its windows
+:tabdo &lt;command&gt; - run command on  all tabs
+:noh - turn off highlight until next search
+:echo @% - show relative path of current open file
+:%s/foo/bar/gci - find each occurence of foo, in every line, and replace it with bar, case insensitive, ask for confirmation
+:put =strftime('%c') - put date timestamp in editor
+:%!python -m json.tool
+</code></pre>
+
+<h3 id="key-maps">key maps</h3>
+<pre><code class="sh">&lt;C-f&gt; - page forward
+&lt;C-b&gt; - page backward
+gt - tab next
+gT - tab previous
+#gt - move to tab number #
+&lt;C-w&gt; s - split 
+&lt;C-w&gt; v - split window vertically
+&lt;C-w&gt; w - switch split window
+&lt;C-w&gt; &lt;direction&gt; - move to pane in &lt;direction&gt; direction
+J - joins line the cursor is on with below line
+ciw'&lt;C-r&gt;&quot;' - delete and yank word, add quotes, note that cw works when start of word, ciw works at any pos in word
+di'hPl2x - unquote word
+&lt;C-r&gt; &quot; - insert contents of &quot; register
+</code></pre>
+
+<h2 id="tmux">tmux</h2>
+<h3 id="commands_1">commands</h3>
+<pre><code class="sh">tmux new-session -s &lt;session-name&gt;
+tmux attach-session -t &lt;session-name&gt;
+tmux list-sessions
+</code></pre>
+
+<h3 id="tmux-commands">tmux commands</h3>
+<pre><code class="sh">move-window -t # - move window to num
+swapt-window -s # -t # - swap window from source to destination num
+setw synchronize-panes - write to all panes
+</code></pre>
+
+<h3 id="key-maps_1">key maps</h3>
+<pre><code class="sh">&lt;C-b&gt; &lt;M-&lt;direction&gt;&gt; - resize pane in &lt;direction&gt; direction
+&lt;C-b&gt; &lt;direction&gt; - move to pane in &lt;direction&gt; direction
+&lt;C-b&gt; [ - enter copy mode
+&lt;C-b&gt; z - zoom pane toggle
+&lt;C-b&gt; q - show pane numbers
+&lt;C-b&gt; q# - move to # pane
+&lt;C-b&gt; &lt;space&gt; - toggle between layouts
+&lt;C-b&gt; % - split pane vertical
+&lt;C-b&gt; &lt;double-quote&gt; - split pane horizontal
+&lt;C-b&gt; n - next window
+&lt;C-b&gt; p - previous window
+&lt;C-b&gt; &amp; - close current window
+&lt;C-b&gt; c - create new window
+&lt;C-b&gt; , - rename current window
+&lt;C-b&gt; # - move to # window
+&lt;C-b&gt; s - list all sessions
+&lt;C-b&gt; $ - rename session
+&lt;C-b&gt; ( - previous session
+&lt;C-b&gt; ) - next session
+&lt;C-b&gt; : - command prompt
+</code></pre>
+
+<h2 id="git">git</h2>
+<h3 id="commands_2">commands</h3>
+<pre><code class="sh"># get remote url
+git config --get remote.origin.url
+
+# list untracked files
+git ls-files --others --exclude-standard
+</code></pre>
+
+<h4 id="rebase-forked-repo">Rebase forked repo</h4>
+<pre><code class="sh"># Add the remote, call it &quot;upstream&quot;:
+git remote add upstream https://github.com/whoever/whatever.git
+
+# Fetch all the branches of that remote into remote-tracking branches, such as upstream/master:
+git fetch upstream
+
+# Make sure that you're on your master branch:
+git checkout master
+
+# Rewrite your master branch so that any commits of yours that aren't already in upstream/master are replayed on top of that other branch:
+git rebase upstream/master
+
+# If you don't want to rewrite the history of your master branch, (for example because other people may have cloned it) then you should replace the last command with git merge upstream/master. However, for making further pull requests that are as clean as possible, it's probably better to rebase.
+# If you've rebased your branch onto upstream/master you may need to force the push in order to push it to your own forked repository on GitHub. You'd do that with:
+git push -f origin master
+</code></pre>
+
+<h2 id="apt">apt</h2>
+<h3 id="install">install</h3>
+<h4 id="neovim">neovim</h4>
+<pre><code class="sh">sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt-get update
+</code></pre>
+
+<h2 id="mkdocs">mkdocs</h2>
+<h3 id="install_1">install</h3>
+<pre><code class="sh">pip install mkdocs
+</code></pre>
+
+<h3 id="getting-started">getting started</h3>
+<pre><code class="sh">mkdocs new my-project
+cd my-project
+mkdocs serve
+</code></pre>
+
+<h2 id="vagrant">Vagrant</h2>
+<h3 id="configs">configs</h3>
+<pre><code class="sh">config.vm.network &quot;private_network&quot;, ip: &quot;192.168.50.4&quot;
+config.vm.hostname (string)
+</code></pre>
+
+<h3 id="commands_3">commands</h3>
+<pre><code class="sh">vagrant ssh-config | grep IdentityFile - get ssh identity file path
+vagrant plugin install vagrant-hostupdater
+vagrant global-status - get state of all active Vagrant envs on system
+vagrant global-status --prune - clear cache to remove stale results
+</code></pre>
+
+<h2 id="virtualbox">VirtualBox</h2>
+<h3 id="install_2">Install</h3>
+<pre><code class="sh"># Linux mint 19
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+echo &quot;deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib&quot; | sudo tee /etc/apt/sources.list.d/virtualbox.list
+sudo apt-get update
+sudo apt-get install -y virtualbox-6.0
+</code></pre>
+
+<h2 id="linux-utils">Linux Utils</h2>
+<h3 id="commands_4">commands</h3>
+<h4 id="push-folders-to-remote-server">Push folders to remote server</h4>
+<pre><code class="sh"># The -a option is a combination flag. It stands for “archive” and syncs 
+# recursively and preserves symbolic links, special and device files, 
+# modification times, group, owner, and permissions. It is more commonly used 
+# than -r and is usually what you want to use.
+# 
+# If you are transferring files that have not already been compressed, like 
+# text files, you can reduce the network transfer by adding compression with 
+# the -z option
+#
+# The -P flag is very helpful. It combines the flags –progress and –partial. 
+# The first of these gives you a progress bar for the transfers and the 
+# second allows you to resume interrupted transfers
+rsync -azP ~/dir1 username@remote_host:destination_directory
+
+# boot directly into console mode
+sudo systemctl set-default multi-user.target
+
+# get current systemd target
+sudo systemctl set-default multi-user.target
+
+# boot into graphical mode
+sudo systemctl set-default graphical.target
+</code></pre>
+
+<h4 id="connect-to-wifi-via-command-line">Connect to wifi via command line</h4>
+<pre><code class="sh"># Connect to wifi using command line option 1 just edit /etc/network/interfaces and write:
+auto wlan0
+iface wlan0 inet dhcp 
+                wpa-ssid {ssid}
+                wpa-psk  {password}
+# After that write and close file and use command:
+sudo dhclient wlan0
+
+# Option 2 Provided you replace your Wireless network card, Wi-Fi Network name, and Wi-FI Password this should also work.
+# First, get your WiFi card up and running:
+sudo ifconfig wlan0 up
+
+# Now scan for a list of WiFi networks in range:
+sudo iwlist wlan0 scan
+
+# This will show you a list of wireless networks, pick yours from the list:
+sudo iwconfig wlan0 essid Wifi2Home key s:ABCDE12345
+
+# To obtain the IP address, now request it with the Dynamic Host Client:
+sudo dhclient wlan0
+
+# You should then be connected to the WiFi network. The first option is better, because it will be able to run as a cron job to start up the wifi whenever you need it going. If you need to turn off your WiFi for whatever reason, just type:
+sudo ifconfig wlan0 down
+</code></pre>
+
+<h4 id="change-default-gateway">Change default gateway</h4>
+<pre><code class="sh"># get routes
+route -n
+
+# change default gateway
+route del default gw &lt;default_gateway_ip&gt;
+route add default gw &lt;default_gateway_ip&gt;
+</code></pre>
+
+<h4 id="ignore-lid-closed">Ignore lid closed</h4>
+<p>To disable entering the sleep mode I had to edit the /etc/systemd/logind.conf file and modify the line:</p>
+<p><code>#HandleLidSwitch=suspend</code></p>
+<p>to</p>
+<p><code>HandleLidSwitch=ignore</code></p>
+<p>Then do</p>
+<p><code>sudo service systemd-logind restart</code></p>
+<h4 id="turn-on-keyboard-backlight">Turn on keyboard backlight</h4>
+<p>To enable the backlight:</p>
+<pre><code class="sh">echo 2 | sudo tee /sys/class/leds/asus::kbd_backlight/brightness 
+</code></pre>
+
+<p>The 2 at echo 2 | can be changed to a value between 0 - 3, with 3 being the brightest.</p>
+<p>To disable the backlight, enter:</p>
+<pre><code class="sh">echo 0 | sudo tee /sys/class/leds/asus::kbd_backlight/brightness
+</code></pre>
+
+<p>The path may vary depending on laptop model and your OS. For example Lenovo Thinkpad L390 running Manjaro has /sys/class/leds/tpacpi::kbd_backlight/brightness. You can use find to see the correct path:</p>
+<pre><code class="sh">find /sys/class/leds -name '*kbd_backlight'
+</code></pre>
+
+<h4 id="remove-ssh-entry">Remove ssh entry</h4>
+<pre><code class="sh">ssh-keygen -f &quot;/home/&lt;USER_NAME&gt;/.ssh/known_hosts&quot; -R &quot;192.168.0.120&quot;
+</code></pre>
+
+<h4 id="format-and-bulk-load-json">Format and bulk load json</h4>
+<pre><code class="sh">jq '.[]' data.json -rc | while read line; do echo &quot;{ \&quot;index\&quot; : { \&quot;_index\&quot; : \&quot;books\&quot; } }\n$line&quot;; done &gt; data-proc.json
+
+split -l 100000 data-proc.json data-part-
+
+for filename in data-part-*; do curl -s -H &quot;Content-Type: application/x-ndjson&quot; -XPOST 192.168.0.133:9200/_bulk --data-binary &quot;@$filename&quot;; sleep 1; done
+
+jq -r '.Data[] | [(.GameId | tostring), .Name, .Vendor] | join(&quot;, &quot;)' response.json | sort -n &gt; response.csv
+</code></pre>
+
+<h4 id="fix-locale-issue">Fix locale issue</h4>
+<pre><code class="sh">sudo locale-gen en_US en_US.UTF-8
+sudo dpkg-reconfigure locales
+</code></pre>
+
+<h2 id="ansible">ansible</h2>
+<h3 id="commands_5">commands</h3>
+<pre><code class="sh">ansible &lt;HOST_GROUP&gt; -m ping
+ansible-playbook basic-setup.yml --limit laptop_vivo -K --extra-vars &quot;user=&lt;USER_NAME&gt;&quot;
+ansible -i inventories/hosts laptops -m &quot;setup&quot;
+ansible -i inventories/hosts laptops -m &quot;ping&quot;
+ansible-playbook basic-setup.yml -i inventories/hosts --limit laptop_vivo -K
+ansible-galaxy init &lt;role-name&gt;
+</code></pre>
+
+<h2 id="php">php</h2>
+<h3 id="snippets">snippets</h3>
+<pre><code class="php">file_put_contents('/home/deploy/debug_logs.txt', date(&quot;D M d, Y G:i&quot;) . ' -&gt; ' . json_encode($registrationData) . PHP_EOL , FILE_APPEND | LOCK_EX);
+</code></pre>
+
+<h2 id="notes">notes</h2>
+<ul>
+<li>ansible update trusted certificates <a href="https://blog.confirm.ch/adding-a-new-trusted-certificate-authority/">link</a></li>
+<li>mitmproxy transparent <a href="https://docs.mitmproxy.org/stable/howto-transparent/">link</a></li>
+<li><code>mitmproxy --mode transparent --showhost</code></li>
+</ul>
+<h2 id="mitmproxy">mitmproxy</h2>
+<h3 id="methods-of-adding-proxy-certificate">Methods of adding proxy certificate</h3>
+<h4 id="ansible_1">Ansible</h4>
+<h5 id="centos">CentOS</h5>
+<pre><code class="yml">- hosts: rizk_dev
+  become: yes
+
+  vars:
+    local_cert_path: ./certs/
+    rizk_dev_cert_path: /etc/pki/ca-trust/source/anchors/
+
+  handlers:
+    - name: restart php-fpm
+      service:
+        name: php-fpm
+        state: restarted
+
+  tasks:
+    - name: install ca package on rhel systems
+      yum:
+        name: ca-certificates
+        state: present
+
+    - name: enable dynamic ca configuration on rhel6
+      shell: /bin/update-ca-trust enable
+
+    - name: push mitmproxy certificates
+      synchronize:
+        src: &quot;{{ local_cert_path }}&quot;
+        dest: &quot;{{ rizk_dev_cert_path }}&quot;
+
+    - name:
+      file:
+        path: &quot;{{ rizk_dev_cert_path }}&quot;
+        state: directory
+        recurse: true
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: update trusted ca redhat
+      shell: /bin/update-ca-trust
+      register: update_ca_trust
+
+    - name: Add rizk-dev to hosts file
+      lineinfile:
+        path: &quot;/home/{{ ansible_user }}/.bashrc&quot;
+        regexp: &quot;{{ item.regexp }}&quot;
+        line: &quot;{{ item.line }}&quot;
+      become_user: &quot;{{ ansible_user }}&quot;
+      with_items:
+        - regexp: &quot;^alias\\sset-default-gateway&quot;
+          line: &quot;alias set-default-gateway='sudo route del default gw 192.168.29.100 &amp;&amp; sudo route add default gw 10.0.2.2'&quot;
+        - regexp: &quot;^alias\\sset-mitmproxy-gateway&quot;
+          line: &quot;alias set-mitmproxy-gateway='sudo route del default gw 10.0.2.2 &amp;&amp; sudo route add default gw 192.168.29.100'&quot;
+        - regexp: &quot;^alias\\srestart-docker&quot;
+          line: &quot;alias restart-dockr='sudo systemctl restart docker'&quot;
+
+    - name: Enable proxy for php-fpm
+      lineinfile:
+        path: &quot;/etc/php-fpm.d/www.conf&quot;
+        regexp: &quot;{{ item.regexp }}&quot;
+        line: &quot;{{ item.line }}&quot;
+      with_items:
+        - regexp: &quot;^env\\[HTTP_PROXY\\]&quot;
+          line: &quot;env[HTTP_PROXY] = 192.168.29.100:8080&quot;
+        - regexp: &quot;^env\\[HTTPS_PROXY\\]&quot;
+          line: &quot;env[HTTPS_PROXY] = 192.168.29.100:8080&quot;
+      tags: [never, enable-proxy]
+      notify: restart php-fpm
+
+    - name: Disbale proxy for php-fpm
+      lineinfile:
+        path: &quot;/etc/php-fpm.d/www.conf&quot;
+        regexp: &quot;{{ item }}&quot;
+        state: absent
+      loop:
+        - &quot;^env\\[HTTP_PROXY\\]&quot;
+        - &quot;^env\\[HTTPS_PROXY\\]&quot;
+      tags: [never, disable-proxy]
+      notify: restart php-fpm
+</code></pre>
+
+<h5 id="ubuntu">Ubuntu</h5>
+<pre><code class="yml">- name: push mitmproxy certificates
+  synchronize:
+    src: mitmproxy-certs/mitmproxy-ca-cert.pem
+    dest: /usr/local/share/ca-certificates/mitmproxy-ca-cert.crt
+
+- name:
+  file:
+    path: /usr/local/share/ca-certificates
+    state: directory
+    recurse: true
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Update trusted ca
+  shell: /usr/sbin/update-ca-certificates
+  register: update_ca
+
+- debug:
+    msg: &quot;{{ update_ca }}&quot;
+</code></pre>
+
+<h4 id="docker-alpine">Docker Alpine</h4>
+<pre><code>FROM node:12.13.1-alpine3.10 AS builder
+COPY ./package.json /app/package.json
+COPY ./.env.development.local /app/.env.development.local
+COPY ./backend /app/backend
+WORKDIR /app
+RUN [&quot;apk&quot;, &quot;add&quot;, &quot;--update&quot;, &quot;nodejs&quot;, &quot;npm&quot;]
+RUN [&quot;npm&quot;, &quot;install&quot;]
+
+FROM node:12.13.1-alpine3.10
+WORKDIR /app
+COPY --from=builder /app /app
+RUN apk update &amp;&amp; apk add ca-certificates &amp;&amp; rm -rf /var/cache/apk/*
+COPY ./mitmproxy-ca-cert.crt /usr/local/share/ca-certificates/mitmproxy-ca-cert.crt
+RUN update-ca-certificates
+CMD [&quot;npm&quot;, &quot;run&quot;, &quot;server:dev&quot;]
+</code></pre>
+
+<pre><code class="yml">version: &quot;3.6&quot;
+
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: Dev.Backend.Dockerfile
+    ports:
+      - 8181:8181
+     volumes:
+       - ./backend:/app/backend
+     environment:
+       - NODE_TLS_REJECT_UNAUTHORIZED=0
+       - HTTP_PROXY=http://192.168.29.200:8080
+       - HTTPS_PROXY=http://192.168.29.200:8080
+  frontend:
+   build:
+     context: ./
+     dockerfile: Dev.Frontend.Dockerfile
+   ports:
+     - 3000:3000
+   volumes:
+     - ./frontend:/app/frontend
+</code></pre>
+
+<h2 id="heroku">heroku</h2>
+<h3 id="commands_6">commands</h3>
+<pre><code class="sh">heroku -v
+heroku apps --team=betsson-zecure
+heroku builds -a source-of-wealth-staging
+heroku config --app=source-of-wealth-staging
+heroku container:login
+heroku container:push web --app=source-of-wealth-staging
+heroku container:release web --app=source-of-wealth-staging
+heroku login
+heroku logs --app=source-of-wealth-staging
+heroku plugins:install heroku-builds
+heroku ps -a source-of-wealth-staging
+heroku ps:kill release.7483 -a source-of-wealth-staging
+</code></pre>
+
+<h2 id="docker">docker</h2>
+<h3 id="commands_7">commands</h3>
+<pre><code class="sh">docker build -t source-of-wealth:latest .
+docker run --name source-of-wealth -d -p 3000:3000 --env-file ./.env source-of-wealth
+docker container stop source-of-wealth
+docker container rm source-of-wealth
+docker exec -it source-of-wealth /bin/sh
+</code></pre>
+
+<h2 id="ssh">ssh</h2>
+<pre><code class="sh"># generate ssh private / public key
+ssh-keygen -t rsa -b 2048 -C &quot;email@example.com&quot;
+
+# copy public key to clipboard
+xclip -sel clip &lt; ~/.ssh/id_rsa.pub
+
+# test wether ssh key added correctly to github
+ssh -T git@github.com
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../vagrant_tutorial/" class="btn btn-neutral float-right" title="Vagrant Tutorial">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../vagrant_tutorial/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

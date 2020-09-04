@@ -1,0 +1,2841 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Ansible For Devops - Env Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Ansible For Devops";
+    var mkdocs_page_input_path = "ansible_for_devops.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Env Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../cheatsheet/">Cheatsheet</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../vagrant_tutorial/">Vagrant Tutorial</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../vagrant_recipes/">Vagrant Recipes</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Ansible For Devops</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#chapter-1-getting-started-with-ansible">Chapter 1 - Getting Started with Ansible</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#installing-ansible">Installing Ansible</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#mac">Mac</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#mac-or-linux">Mac or Linux</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#upgrade-ansible-via-pip">upgrade ansible via pip</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#fedora-like-systems">fedora-like systems</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#debian-systems">Debian systems</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-basic-inventory-file">Creating a basic inventory file</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#running-first-ad-hoc-ansible-command">Running first ad-hoc ansible command</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chapter-2-local-infrastructure-development-ansible-and-vagrant">Chapter 2 - Local Infrastructure Development: Ansible and Vagrant</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#setting-up-vagrant">Setting up vagrant</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-ansible-with-vagrant">Using Ansible with vagrant</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cleaning-up">Cleaning up</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chapter-3-ad-hoc-commands">Chapter 3 - Ad-Hoc Commands</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#build-infrastructure-with-vagrant-for-testing">Build infrastructure with Vagrant for testing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#your-first-adhoc-commands">Your first adhoc commands</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#make-changes-using-ansible-modules">Make changes using Ansible modules</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configure-application-servers">Configure application servers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configure-the-database-servers">Configure the Database servers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#making-changes-to-just-one-server">Making changes to just one server</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#manages-users-and-groups">Manages users and groups</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#manage-packages">Manage packages</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#manage-files-and-directories">Manage files and directories</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#get-information-about-a-file">Get information about a file</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#copy-a-file-to-the-servers">Copy a file to the servers</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#retrieve-a-file-from-servers">Retrieve a file from servers</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#create-directories-and-files">Create directories and files</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#delete-directories-and-files">Delete directories and files</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-operations-in-the-background">Run operations in the background</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#update-servers-asynchronously">Update servers asynchronously</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#check-log-files">Check log files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#manage-cron-jobs">Manage cron jobs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#deploy-version-controlled-application">Deploy version-controlled application</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ansibles-ssh-connection-history">Ansible's SSH connection history</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#faster-openssh-with-pipelining">Faster OpenSSH with Pipelining</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chapter-4-ansible-playbooks">Chapter 4 - Ansible Playbooks</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#power-plays">Power plays</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#revised-ansible-playbook-now-with-idempotency">Revised Ansible Playbook - Now with idempotency!</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#running-playbooks">Running playbooks</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#limiting-playbooks-to-particular-hosts-and-groups">Limiting playbooks to particular hosts and groups</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#setting-user-and-sudo-options">Setting user and sudo options</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#other-options">Other options</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#real-world-playbook-centos-nodejs-app-server">Real-World playbook: CentOS Node.js app server</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#vagrantfile">Vagrantfile</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#provisioningplaybookyml">provisioning/playbook.yml</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#provisioningappappjs">provisioning/app/app.js</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#provisioningapppackagejson">provisioning/app/package.json</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#notes">notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#real-world-playbook-ubuntu-lamp-server-with-drupal">Real-world playbook: Ubuntu LAMP server with drupal</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#vagrantfile_1">Vagrantfile</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#provisioningansiblecfg">provisioning/ansible.cfg</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#provisioningplaybookyml_1">provisioning/playbook.yml</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#provisioningvarsyml">provisioning/vars.yml</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#provisioningtemplatedrupaltestconfj2">provisioning/template/drupal.test.conf.j2</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#notes_1">notes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#real-world-playbook-ubuntu-server-with-solr">Real-world playbook: Ubuntu server with Solr</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#vagrantfile_2">Vagrantfile</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#provisioningplaybookyml_2">provisioning/playbook.yml</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#provisioningvarsyml_1">provisioning/vars.yml</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#notes_2">notes</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chapter-5-ansible-playbook-beyond-the-basics">Chapter 5 - Ansible Playbook - Beyond the Basics</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#handlers">Handlers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#environmental-variables">Environmental variables</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#pre-play-environment-variables">Pre-play environment variables</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#playbook-variables">Playbook Variables</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#inventory-variables">Inventory variables</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#registeted-variables">Registeted Variables</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#accessing-variables">Accessing Variables</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#magic-variables-with-host-and-group-variables-and-information">Magic variables with host and group variables and information</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#facts-variables-derived-from-system-info">Facts (Variables derived from system info)</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#local-facts-factsd">Local Facts (Facts.d)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ansible-vault-keeping-secrets-secret">Ansible Vault - keeping secrets secret</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#variable-precedence">Variable Precedence</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ifthenwhen-conditionals">If/then/when - Conditionals</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#jinja-expression-python-built-ins-and-logic">Jinja Expression, Python built-ins and Logic</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#register">register</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#when">when</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#changed_when-and-failed_when">changed_when and failed_when</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ignore_errors">ignore_errors</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#delegation-local-actions-and-pauses">Delegation, Local Actions and Pauses</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#pausing-playbook-execution-with-wait_for">Pausing playbook execution with wait_for</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#running-an-entire-playbook-locally">Running an entire playbook locally</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#prompts">Prompts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tags">Tags</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#blocks">Blocks</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#chapter-6-playbook-organization-roles-includes-and-imports">Chapter 6 - Playbook Organization - Roles, Includes, and Imports</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#imports">Imports</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#includes">Includes</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#dynamic-includes">Dynamic includes</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#handler-inputs-and-includes">Handler inputs and includes</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#playbook-imports">Playbook imports</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#complete-includes-example">Complete includes example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#roles">Roles</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#role-scaffolding">Role scaffolding</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#building-your-first-role">Building your first role</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#more-flexibility-with-role-vars-and-defaults">More flexibility with role vars and defaults</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#other-role-parts-handlers-files-and-templates">Other role parts: handlers, files, and templates</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#handlers_1">Handlers</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#files-and-templates">Files and Templates</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../understanding_typescript/">Understanding Typescript</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../iptables/">Iptables</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Env Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Ansible For Devops</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="ansible-for-devops-notes">Ansible for Devops notes</h1>
+<pre><code class="sh">git clone https://github.com/geerlingguy/ansible-for-devops.git
+</code></pre>
+
+<hr />
+<h2 id="chapter-1-getting-started-with-ansible">Chapter 1 - Getting Started with Ansible</h2>
+<h3 id="installing-ansible">Installing Ansible</h3>
+<h4 id="mac">Mac</h4>
+<pre><code class="sh">brew install ansible
+</code></pre>
+
+<h4 id="mac-or-linux">Mac or Linux</h4>
+<pre><code class="sh">sudo pip install ansible
+</code></pre>
+
+<h4 id="upgrade-ansible-via-pip">upgrade ansible via pip</h4>
+<pre><code class="sh">pip install --upgrade ansible
+</code></pre>
+
+<h4 id="fedora-like-systems">fedora-like systems</h4>
+<p>run the following to see if EPEL repo is already available</p>
+<pre><code class="sh">yum repolist | grep epel
+</code></pre>
+
+<p>If no results you need to install with the following commands</p>
+<pre><code class="sh">rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/\ epel-release-6-8.noarch.rpm
+yum install epel-release
+yum -y install ansible
+</code></pre>
+
+<h4 id="debian-systems">Debian systems</h4>
+<pre><code class="sh">sudo apt-add-repository -y ppa:ansible/ansible
+sudo apt-get update
+sudo apt-get install -y ansible
+</code></pre>
+
+<p>if missing add-apt-repository</p>
+<pre><code class="sh">sudo apt-get install python-software-properties
+</code></pre>
+
+<h3 id="creating-a-basic-inventory-file">Creating a basic inventory file</h3>
+<ul>
+<li>ansible uses an inventory file to communicate with your servers</li>
+<li>create file at <code>/etc/ansible/hosts</code> and add one server to it</li>
+</ul>
+<pre><code class="sh">sudo mkdir /etc/ansible
+sudo touch /etc/ansible/hosts
+</code></pre>
+
+<ul>
+<li>edit hosts file and put the following in it</li>
+</ul>
+<pre><code>[example]
+wwww.example.com
+</code></pre>
+
+<ul>
+<li>since I am using vagrant for vm here is the hosts file I am using</li>
+</ul>
+<pre><code>[example]
+ansible-devops-1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_private_key_file=~/Workspace/tmp/ansible-devops/.vagrant/machines/default/virtualbox/private_key
+</code></pre>
+
+<ul>
+<li>setting up server with vagrant</li>
+</ul>
+<pre><code class="ruby">Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;hashicorp/bionic64&quot;
+  config.vm.hostname = &quot;ansible-devops-1&quot;
+  config.vm.network &quot;private_network&quot;, ip: &quot;192.168.50.101&quot;
+end
+</code></pre>
+
+<h3 id="running-first-ad-hoc-ansible-command">Running first ad-hoc ansible command</h3>
+<pre><code class="sh">ansible example -m ping -u [username]
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> ansible assumes you are using passwordless (key-based) login for SSH</p>
+</blockquote>
+<p>You can read a primer on SSH/OpenSSH/keys <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys">here</a></p>
+<p>A useful command:</p>
+<pre><code class="sh">ansible example -a &quot;free -m&quot; -u [username]
+</code></pre>
+
+<hr />
+<h2 id="chapter-2-local-infrastructure-development-ansible-and-vagrant">Chapter 2 - Local Infrastructure Development: Ansible and Vagrant</h2>
+<h3 id="setting-up-vagrant">Setting up vagrant</h3>
+<pre><code class="sh">vagrant box add geerlingguy/centos7
+vagrant init geerlingguy/centos7
+vagrant up
+</code></pre>
+
+<h3 id="using-ansible-with-vagrant">Using Ansible with vagrant</h3>
+<ul>
+<li>Open Vagrant file and edit it</li>
+</ul>
+<pre><code class="ruby">Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;geerlingguy/centos7&quot;
+
+  # Provisioning configuration for Ansible
+  config.vm.provision &quot;ansible&quot; do |ansible|
+    ansible.playbook = &quot;playbook.yml&quot;
+  end
+end
+</code></pre>
+
+<ul>
+<li>Create ansible playbook <code>playbook.yml</code></li>
+</ul>
+<pre><code class="yml">---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Ensure NTP (for time synchronization) is installed.
+      yum: name=ntp state=present
+    - name: Ensure NTP is running
+      service: name=ntpd state=started enabled=yes
+</code></pre>
+
+<ul>
+<li><code>---</code> is a marker showing document is formatted in YAML</li>
+<li><code>- hosts: all</code> tells ansible which hosts this playbook applies. <code>all</code> works here since Vagrant is invisibly usings its own Ansible inventory file</li>
+<li><code>become: yes</code> since priviliged access is needed to install NTP and do system configs, this tells Ansible to use <code>sudo</code> for all tasks in playbook</li>
+<li><code>tasks:</code> All tasks after this line will run on all hosts`</li>
+<li>the following command is equivalent of running <code>yum install ntp</code> but also checks if <code>ntp</code> is installed before</li>
+</ul>
+<pre><code class="yml">- name: Ensure NTP (for time synchronization) is installed.
+  yum: name=ntp state=present
+</code></pre>
+
+<ul>
+<li>the following line checks and ensures ntpd service is started and running, and sets it to start at system boot</li>
+</ul>
+<pre><code class="yml">- name: Ensure NTP is running
+  service: name=ntpd state=started enabled=yes
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> you can leave out the <code>name</code> module but it is useful as it is a piece of documentation</p>
+</blockquote>
+<pre><code class="yml">---
+- hosts: all
+  become: yes
+  tasks:
+    - yum: name=ntp state=present
+    - service: name=ntpd state=started enabled=yes
+</code></pre>
+
+<h3 id="cleaning-up">Cleaning up</h3>
+<ul>
+<li>you can remove the vagrant machine from your system by running <code>vagrant destroy</code></li>
+<li>if need be you can rebuild again using <code>vagrant up</code></li>
+</ul>
+<hr />
+<h2 id="chapter-3-ad-hoc-commands">Chapter 3 - Ad-Hoc Commands</h2>
+<h3 id="build-infrastructure-with-vagrant-for-testing">Build infrastructure with Vagrant for testing</h3>
+<ul>
+<li>we are going to manage three VMs: two app servers and a database server</li>
+</ul>
+<pre><code class="ruby"># -*- mode: ruby -*-
+# vi: set ft=ruby :
+#
+VAGRANTFILE_API_VERSION = &quot;2&quot;
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # General Vagrant VM configuration
+  config.vm.box = &quot;geerlingguy/centos7&quot;
+  config.ssh.insert_key = false
+  config.vm.synced_folder &quot;.&quot;, &quot;/vagrant&quot;, disabled: true
+  config.vm.provider :virtualbox do |v|
+    v.memory = 256
+    v.linked_clone = true
+  end
+
+  # Application server 1
+  config.vm.define &quot;app1&quot; do |app|
+    app.vm.hostname = &quot;orc-app1.test&quot;
+    app.vm.network :private_network, ip: &quot;192.168.60.4&quot;
+  end
+
+  # Application server 2
+  config.vm.define &quot;app2&quot; do |app|
+    app.vm.hostname = &quot;orc-app2.test&quot;
+    app.vm.network :private_network, ip: &quot;192.168.60.5&quot;
+  end
+
+  # Database server
+  config.vm.define &quot;db&quot; do |db|
+    db.vm.hostname = &quot;orc-db.test&quot;
+    db.vm.network :private_network, ip: &quot;192.168.60.6&quot;
+  end
+end
+</code></pre>
+
+<pre><code># Application servers
+[app]
+192.168.60.4
+192.168.60.5
+
+# Database server
+[db]
+192.168.60.6
+
+# Group 'multi' with all servers
+[multi:children]
+app
+db
+
+# Variables that will be applied to all servers
+[multi:vars]
+ansible_ssh_user=vagrant
+ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+</code></pre>
+
+<ul>
+<li>the first block puts both of app servers into an <code>app</code> group</li>
+<li>the second block puts the database server into a <code>db</code> group</li>
+<li>the third block tells ansible to define a new group <code>multi</code> with child groups</li>
+<li>the fourth block adds variables to the multi group that will be applied to all servers within multi and all its children</li>
+</ul>
+<h3 id="your-first-adhoc-commands">Your first adhoc commands</h3>
+<ul>
+<li>check vagrant configured VMs with right hostnames</li>
+<li>use <code>-a</code> argument <code>hostname</code> to run hostname on all servers</li>
+</ul>
+<pre><code class="sh">ansible multi -a &quot;hostname&quot;
+</code></pre>
+
+<ul>
+<li>by default ansible will run commands in parallel, using multiple process forks</li>
+<li>you can also tell ansible to run command using only one fork</li>
+</ul>
+<pre><code class="sh">ansible multi -a &quot;hostname&quot; -f 1
+</code></pre>
+
+<ul>
+<li>check disk space avaiable</li>
+</ul>
+<pre><code class="sh">ansible multi -a &quot;df -h&quot;
+</code></pre>
+
+<ul>
+<li>check free memory</li>
+</ul>
+<pre><code class="sh">ansible multi -a &quot;free -m&quot;
+</code></pre>
+
+<ul>
+<li>check date and time</li>
+</ul>
+<pre><code class="sh">ansible multi -a &quot;date&quot;
+</code></pre>
+
+<h3 id="make-changes-using-ansible-modules">Make changes using Ansible modules</h3>
+<ul>
+<li>install NTP daemon on server to keep the time in sync</li>
+</ul>
+<pre><code class="sh">ansible multi -b -m yum -a &quot;name=ntp state=present&quot;
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> <code>-b</code> option tells ansible to run command with become (i.e. run with <code>sudo</code>)</p>
+<p><strong>Note:</strong> if running command against server requiring password use <code>-K</code> so you can enter password</p>
+</blockquote>
+<ul>
+<li>make sure NTP daemon is started and set to run on boot</li>
+</ul>
+<pre><code class="sh">ansible multi -b -m service -a &quot;name=ntpd state=started enabled=yes&quot;
+</code></pre>
+
+<ul>
+<li>even if running shell commands you could wrap them in Ansible's <code>shell</code> or <code>command</code> modules</li>
+</ul>
+<pre><code class="sh">ansible multi -m shell -a &quot;date&quot;
+</code></pre>
+
+<ul>
+<li>check to make sure our servers are synced closely to official time in NTP server</li>
+</ul>
+<pre><code class="sh">ansible multi -b -a &quot;service ntpd stop&quot;
+ansible multi -b -a &quot;ntpdate =q 0.rhel.pool.ntp.org&quot;
+ansible multi -b -a &quot;service ntpd start&quot;
+</code></pre>
+
+<h3 id="configure-application-servers">Configure application servers</h3>
+<pre><code class="sh">ansible app -b -m yum -a &quot;name=MySQL-python state=present&quot;
+ansible app -b -m yum -a &quot;name=python-setuptools state=present&quot;
+ansible app -b -m easy_install -a &quot;name=django&lt;2 state=present&quot;
+</code></pre>
+
+<ul>
+<li>you could install django using <code>pip</code>, which can be install via <code>easy_install</code></li>
+<li>Ansible's <code>easy_install</code> module doesn't allow you to uninstall packages lil <code>pip</code> does</li>
+<li>to make sure Django is installed and working correctly:</li>
+</ul>
+<pre><code class="sh">ansible app -a &quot;python -c 'import django; \
+print django.get_version()'&quot;
+</code></pre>
+
+<h3 id="configure-the-database-servers">Configure the Database servers</h3>
+<ul>
+<li>install mariadb, start it and configure firewall to allow access on 3306</li>
+</ul>
+<pre><code class="sh">ansible db -b -m yum -a &quot;name=mariadb-server state=present&quot;
+ansible db -b -m service -a &quot;name=mariadb state=started enabled=yes&quot;
+ansible db -b -a &quot;iptables -F&quot;
+ansible db -b -a &quot;iptables -A INPUT -s 192.168.60.0/24 -p tcp -m tcp --dport 3306 -j ACCEPT&quot;
+</code></pre>
+
+<ul>
+<li>set up mariadb with access for one user</li>
+</ul>
+<pre><code class="sh">ansible db -b -m yum -a &quot;name=MySQL-python state=present&quot;
+ansible db -b -m mysql_user -a &quot;name=django host=% password=12345 priv=*.*:ALL state=present&quot;
+</code></pre>
+
+<h3 id="making-changes-to-just-one-server">Making changes to just one server</h3>
+<ul>
+<li>check service status and restart it on one server</li>
+</ul>
+<pre><code class="sh">ansible app -b -a &quot;service ntpd status&quot;
+ansible app -b -a &quot;service ntpd restart&quot; --limit &quot;192.168.60.4&quot;
+</code></pre>
+
+<ul>
+<li>we used the <code>--limit</code> argument to limit the command to a specific host in the specified group</li>
+<li><code>--limit</code> will match either an exact string or a regular expression prefixed with <code>~</code></li>
+</ul>
+<pre><code class="sh"># Limit hosts with a simple pattern (asterisk is a wildcard)
+ansible app -b -a &quot;service ntpd restart&quot; --limit &quot;*.4&quot;
+
+# Limit hosts with a regular expression (prefix with a tilde)
+ansible app -b -a &quot;service ntpd restart&quot; --limit ~&quot;.*\.4&quot;
+</code></pre>
+
+<blockquote>
+<p>Try to reserve the <code>--limit</code> option for running on single servers, if you often find yourself running on same set of server consider adding them to a group in your inventory</p>
+</blockquote>
+<h3 id="manages-users-and-groups">Manages users and groups</h3>
+<ul>
+<li>ansible's <code>users</code> and <code>group</code> modules make user management easy and standard across linux flavors</li>
+<li>add an <code>admin</code> group on the app server for server admins</li>
+</ul>
+<pre><code class="sh">ansible app -b -m group -a &quot;name=admin state=present&quot;
+</code></pre>
+
+<ul>
+<li>you can remove a group by setting <code>state=absent</code> set a group id with <code>gid=[gid]</code> and indicate group is a system group with <code>system=yes</code></li>
+<li>add user <code>johndoe</code> to app server with group just created and give him a home folder</li>
+</ul>
+<pre><code class="sh">ansible app -b -m user -a &quot;name=johndoe group=admin createhome=yes&quot;
+</code></pre>
+
+<ul>
+<li>if you want to create an SSH key for the new user you can use <code>generate_ssh_key=yes</code></li>
+<li>you can also set UID of user <code>uid=[uid]</code> user's shell <code>shell=[shell]</code> and password <code>password=[encrypted-password]</code></li>
+<li>if you want to delete an account: </li>
+</ul>
+<pre><code class="sh">ansible app -b -m user -a &quot;name=johndoe state=absent remove=yes&quot;
+</code></pre>
+
+<h3 id="manage-packages">Manage packages</h3>
+<ul>
+<li>ansible has a variety of package management modules for any flavor of linux</li>
+<li>there is also a generic <code>package</code> module that can be used for easier cross-platform ansible usage</li>
+<li>if you want to install a generic package like <code>git</code> on any system, you can use:</li>
+</ul>
+<pre><code class="sh">ansible app -b -m package -a &quot;name=git state=present&quot;
+</code></pre>
+
+<h3 id="manage-files-and-directories">Manage files and directories</h3>
+<h4 id="get-information-about-a-file">Get information about a file</h4>
+<pre><code class="sh">ansible multi -m stat -a &quot;path=/etc/environment&quot;
+</code></pre>
+
+<h4 id="copy-a-file-to-the-servers">Copy a file to the servers</h4>
+<ul>
+<li>while Ansible has more advanced file copy modules like <code>rsync</code> most file copy operations can be completed with Ansible's copy module</li>
+</ul>
+<pre><code class="sh">ansible multi -m copy -a &quot;src=/etc/hosts dest=/tmp/hosts&quot;
+</code></pre>
+
+<ul>
+<li><code>src</code> can be a file or directory</li>
+<li>if you include a trailing slash, only contents of the directory will be copied into <code>dest</code></li>
+<li>if you omit trailing slash, the contents and directory will be copied to <code>dest</code></li>
+<li><code>copy</code> module is perfect for single-file copies, and small directories</li>
+<li>if you want to copy hundreds of files, you should consider either copying an archive and expanding with <code>unarchive</code> module, or using <code>synchronize</code> or <code>rysnc</code> modules</li>
+</ul>
+<h4 id="retrieve-a-file-from-servers">Retrieve a file from servers</h4>
+<ul>
+<li><code>fetch</code> module works exactly like <code>copy</code> module but in reverse</li>
+<li>use the following command to grab hosts file from servers</li>
+</ul>
+<pre><code class="sh">ansible multi -b -m fetch -a &quot;src=/etc/hosts dest=/tmp&quot;
+</code></pre>
+
+<ul>
+<li>by default <code>fetch</code> will put the file from each server into a folder in the destination with the name of the host</li>
+<li>thus the server hosts file will end up in <code>/tmp/192.168.60.6/etc/hosts</code></li>
+<li>if filenames are unique across servers you can use <code>flat=yes</code> and <code>dest=/tmp/</code> to fetch directly into <code>/tmp</code> directory</li>
+</ul>
+<h4 id="create-directories-and-files">Create directories and files</h4>
+<ul>
+<li><code>file</code> module used to create files and directories, manage permissions, and ownershoips, modify SELinux properties, and create symlinks</li>
+<li>here's how to create a directory:</li>
+</ul>
+<pre><code class="sh">ansible multi -m file -a &quot;dest=/tmp/test mode=644 state=directory&quot;
+</code></pre>
+
+<ul>
+<li>here's how to create a symlink</li>
+</ul>
+<pre><code class="sh">ansible multi -m file -a &quot;src=/src/file dest=/dest/symlink state=link&quot;
+</code></pre>
+
+<h4 id="delete-directories-and-files">Delete directories and files</h4>
+<pre><code class="sh">ansible multi -m file -a &quot;dest=/tmp/test state=absent&quot;
+</code></pre>
+
+<ul>
+<li>other file-management modules include <code>lineinfile</code>, <code>ini_file</code>, and <code>unarchive</code></li>
+</ul>
+<h3 id="run-operations-in-the-background">Run operations in the background</h3>
+<ul>
+<li>for long running operations (such as <code>apt-get update</code>) you can tell Ansible to run commands asynchronously and poll servers to see when commands finish</li>
+<li><code>-B &lt;seconds&gt;</code> the maximum amount of time to let job run</li>
+<li><code>-P &lt;seconds&gt;</code> the amount of time to wait between polling the servers for updates</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> as of Ansible 2.0, async polling no longer displays output in real time, this is an open <a href="https://github.com/ansible/ansible/issues/14681">bug</a></p>
+</blockquote>
+<h4 id="update-servers-asynchronously">Update servers asynchronously</h4>
+<ul>
+<li>run <code>yum -y update</code> on all servers and set <code>-P 0</code> to fire command on all server and print background job information</li>
+</ul>
+<pre><code class="sh">ansible multi -b -B 3600 -P 0 -a &quot;yum -y update&quot;
+</code></pre>
+
+<ul>
+<li>you can check the status using <code>async_status</code> module as long as you have <code>ansible_job_id</code> value to pass</li>
+</ul>
+<pre><code class="sh">ansible multi -b -m async_status -as &quot;jid=[ansible_job_id]
+</code></pre>
+
+<h3 id="check-log-files">Check log files</h3>
+<ul>
+<li>common file operations like <code>tail</code>, <code>cat</code>, <code>grep</code>, etc... work through <code>ansible</code> command with a few caveats</li>
+<li>Operations that continously monitor a file won't work because Ansible only displays output after an operation is complete</li>
+<li>it's not a good idea to run a command that returns a huge amount of data</li>
+<li>if you redirect and filter output from a command you need to use <code>shell</code> module instead of default <code>command</code> module</li>
+</ul>
+<pre><code class="sh">ansible multi -b -a &quot;tail /var/log/messages&quot;
+</code></pre>
+
+<ul>
+<li>if you want to filter messages log with something like grep, use <code>shell</code></li>
+</ul>
+<pre><code class="sh">ansible multi -b -m shell -a &quot;tail /var/log/messages | grep ansible-command | wc -l&quot;
+</code></pre>
+
+<h3 id="manage-cron-jobs">Manage cron jobs</h3>
+<ul>
+<li>you can manage cron jobs with the <code>cron</code> module`</li>
+<li>the following runs a shell script every day at 4 a.m</li>
+</ul>
+<pre><code class="sh">ansible multi -b -m cron -a &quot;name='daily-cron-all-servers' hour=4 job='/path/to/daily-script.sh'&quot;
+</code></pre>
+
+<ul>
+<li>ansible will assume <code>&lt;asterisk&gt;</code> for all values not specified</li>
+<li>valid values are <code>day</code>, <code>hour</code>, <code>minute</code>, <code>month</code>, and <code>weekday</code></li>
+<li>you can also specify special time values like <code>reboot</code>, <code>yearly</code>, or <code>monthly</code> using `special_time=[value]</li>
+<li>you can set the user the job will run under via <code>user=[user]</code></li>
+<li>you can create a backup of current crontab via <code>backup=yes</code></li>
+<li>if you want to remove a corn job use <code>state=absent</code></li>
+</ul>
+<pre><code class="sh">ansible multi -b -m cron -a &quot;name='daily-cron-all-servers' state=absent&quot;
+</code></pre>
+
+<ul>
+<li>you can also manage custom crontab files by specifing the location of the cron file with <code>cron_file=cron_file_name</code></li>
+</ul>
+<h3 id="deploy-version-controlled-application">Deploy version-controlled application</h3>
+<ul>
+<li>for simple deployments, ad-hoc commands can help</li>
+</ul>
+<pre><code class="sh">ansible app -b -m git -a &quot;repo=git://example.com/path/to/repo.git \
+dest=/opt/myapp update=yes version=1.2.4&quot;
+</code></pre>
+
+<ul>
+<li>git module lets you specifiy branch, tag or even specific commit</li>
+<li>to force update checked-out copy we use <code>update=yes</code></li>
+<li>if git is not installed you can use the following</li>
+</ul>
+<pre><code class="sh">ansible app -b -m package -a &quot;name=git state=present&quot;
+</code></pre>
+
+<ul>
+<li>if you get "unkown hostkey" add <code>accept_hostkey=yes</code> or add hostkey to you server's <code>known_hosts</code></li>
+<li>run the application's update.sh shell script</li>
+</ul>
+<pre><code class="sh">ansible app -b -a &quot;/opt/myapp/update.sh&quot;
+</code></pre>
+
+<h3 id="ansibles-ssh-connection-history">Ansible's SSH connection history</h3>
+<ul>
+<li>ansible uses standard and secure SSH connection to communicate with servers</li>
+<li>on thing that is universal to all of ansible's SSH conection methods is that it uses the connection to transfer one or a few files defining play or command to the remote server, runs the play/command, then deletes the transferred files and reports back the results</li>
+</ul>
+<h4 id="faster-openssh-with-pipelining">Faster OpenSSH with Pipelining</h4>
+<ul>
+<li>modern versions of Ansible allow you to improve performance of default OpenSSH implementation</li>
+<li>instead of copying files, running them on remote server, then removing them, the pipelining method will send and execute commands of most modules directly over SSH connection</li>
+<li>this can be enabled via <code>pipelining=true</code> under the <code>ssh_connection</code> section of the ansible config file <code>ansible.cfg</code></li>
+</ul>
+<blockquote>
+<p><em>Note:</em> you need to comment out <code>Defaults requiretty</code> option in <code>/etc/sudoers</code> for this to work well, it should be commented out by default but best to double check</p>
+</blockquote>
+<h2 id="chapter-4-ansible-playbooks">Chapter 4 - Ansible Playbooks</h2>
+<h3 id="power-plays">Power plays</h3>
+<ul>
+<li>it is easy to convert shell scripts directly into ansible playbooks</li>
+</ul>
+<pre><code class="sh"># Install apache
+yum install --quiet -y httpd httpd-devel
+# Copy configuration file
+cp httpd.conf /etc/httpd/conf/httpd.conf
+cp httpd-vhosts.conf /etc/httpd/conf/httpd-vhosts.conf
+# Start Apache and configure it to run at boot
+service httpd start
+chkconfig httpd on
+</code></pre>
+
+<pre><code class="yml">---
+- hosts: all
+  tasks:
+    - name: Install Apache.
+      command: yum install --quiet -y httpd httpd-devel
+    - name: copy config file
+      command: &gt;
+        cp httpd.conf /etc/httpd/conf/httpd.conf
+    - command: &gt;
+        cp httpd-vhosts.conf /etc/httpd/conf/httpd-vhosts.conf
+    - name: Start Apache and configure it to run at boot
+      command: service httpd start
+    - command: chkconfig httpd on
+</code></pre>
+
+<ul>
+<li>to run the playbook you would call it using the following command</li>
+</ul>
+<pre><code class="sh">ansible-playbook playbook.yml
+</code></pre>
+
+<h4 id="revised-ansible-playbook-now-with-idempotency">Revised Ansible Playbook - Now with idempotency!</h4>
+<ul>
+<li>the above playbook will perform <em>exactly</em> like the shell script, but you can improve by using ansible's built-in modules</li>
+</ul>
+<pre><code class="yml">---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Apache
+      yum:
+        name:
+          - httpd
+          - httpd-devel
+        state: present
+    - name: Copy config files
+      copy:
+        src: &quot;{{ item.src }}&quot;
+        dest: &quot;{{ item.dest }}&quot;
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+        - src: httpd.conf
+          dest: /etc/httpd/conf/httpd.conf
+        - src: httpd-vhosts.conf
+          dest: /etc/httpd/conf/httpd-vhosts.conf
+    - name: Make sure Apache is started now and at boot
+      service: name=httpd state=started enabled=yes
+</code></pre>
+
+<ul>
+<li><code>become: yes</code> runs all commands through <code>sudo</code></li>
+<li>we tell yum to make sure packages installed with <code>state: present</code>, but we could also use <code>state: latest</code> to ensure latest version or <code>state: absent</code> to make sure it packages not installed</li>
+<li>you can pass lists of variables to the tasks using <code>with_items:</code> and reference them using the <code>item</code> variable <code>{{ item }}</code></li>
+<li>you can list as many variables as you want, even deeply-nested dicts</li>
+<li>this format of playbook is <strong>idempotent</strong></li>
+<li>running the playbook with the <code>--check</code> option verifies the configuration matches waht's defined in the playbook without running the tasks on the server</li>
+</ul>
+<h3 id="running-playbooks">Running playbooks</h3>
+<ul>
+<li>running the above playbooks will run it across every host defined in your ansible inventory</li>
+</ul>
+<h4 id="limiting-playbooks-to-particular-hosts-and-groups">Limiting playbooks to particular hosts and groups</h4>
+<ul>
+<li>you can limit a playbook by changing the <code>hosts:</code> definition</li>
+<li>the value can be set to <code>all</code> hosts, a group of hosts, multiple groups of hosts (e.g. <code>webservers,dbservers</code>, individual hosts (e.g. <code>atl.example.com</code>), or a mixture of hosts</li>
+<li>you can do wild card matches like <code>*.example.com</code></li>
+<li>you can also limit hosts via the following command</li>
+</ul>
+<pre><code class="sh">ansible-playbook playbook.yml --limit webservers
+</code></pre>
+
+<ul>
+<li>you can also limit playbook to one particular host</li>
+</ul>
+<pre><code class="sh">ansible-playbook playbook.yml --limit xyz.example.com
+</code></pre>
+
+<ul>
+<li>to see list of hosts that would be affected by your playbook before you run it:</li>
+</ul>
+<pre><code class="sh">ansible-playbook playbook.yml --list-hosts
+</code></pre>
+
+<pre><code>playbook: playbook.yml
+
+  play #1 (all): all    TAGS: []
+    pattern: ['all']
+    hosts (3):
+      192.168.60.6
+      192.168.60.5
+      192.168.60.4
+</code></pre>
+
+<h3 id="setting-user-and-sudo-options">Setting user and sudo options</h3>
+<ul>
+<li>if no <code>remote_user</code> is defined alongside <code>hosts</code> in a playbook, it assumes you'll connect as the user defined in your inventory file for a particular host, then it will fall back to your local user account name</li>
+<li>you can explicitly define a remote user with the <code>--user (-u)</code> option</li>
+</ul>
+<pre><code class="sh">ansible-playbook playbook.yml --user=johndoe
+</code></pre>
+
+<ul>
+<li>when you need to pass sudo password to remote server, use <code>--ask-become-pass (-K)</code> option</li>
+<li>you can force all tasks in playbook to use sudo with <code>--become (-b)</code> option</li>
+<li>you can define the sudo user for the tasks run via <code>sudo</code> (the default is root) with the <code>--become-user (-U)</code> option</li>
+</ul>
+<pre><code class="sh">ansible-playbook playbook.yml --become --become-user=janedoe --ask-become-pass
+</code></pre>
+
+<ul>
+<li>if you are not using key-based auth to connect to servers you can use <code>--ask-pass</code></li>
+</ul>
+<h4 id="other-options">Other options</h4>
+<ul>
+<li><code>--inventory=PATH (-i PATH)</code> define a custom inventory file (default is located at <code>/etc/ansible/hosts</code></li>
+<li><code>--verbose (-v)</code> verbose mode, you can pass <code>-vvvv</code> to give every detail</li>
+<li><code>--extra-vars=VARS (-e VARS)</code> define variables to be used in the playook in <code>"key=value,key=value"</code> format</li>
+<li><code>--forks=NUM (-f NUM)</code> set this number higher than 5 to increase the number of servers tasks will run on concurrently</li>
+<li><code>--connection=TYPE (-c TYPE) the type of connection which will be used, this defaults to</code>ssh<code>but you can use</code>local` to run a playbook on your local machine, or on a remote server via cron</li>
+<li><code>--check</code> run playbook in Check Mode ('Dry Run')</li>
+</ul>
+<h3 id="real-world-playbook-centos-nodejs-app-server">Real-World playbook: CentOS Node.js app server</h3>
+<pre><code class="sh"># install EPEL repo
+yum install -y epel-release
+
+# Import Remi GPG key
+wget https://rpms.remirepo.net/RPM-GPG-KEY-remi \
+  -O /etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi
+
+# Install 
+rpm -Uvh --quiet \
+  https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+
+# Install Node.js (npm plus all its dependencies)
+yum --enablerepo=epel -y install npm
+</code></pre>
+
+<ul>
+<li>if you wanted to skip adding GPG keys, just run commands with <code>--nogpgcheck</code></li>
+<li>in Ansible set the <code>disable_gpg_check</code> parameter of yum module to <code>yes</code></li>
+<li>this is not a good idea, GPG stands for <em>GNU Privacy Guard</em> and it is a way for devs and package dists to sign their packages</li>
+</ul>
+<pre><code>.
+├── Vagrantfile
+└── provisioning
+    ├── app
+    │   ├── app.js
+    │   └── package.json
+    └── playbook.yml
+
+2 directories, 4 files
+</code></pre>
+
+<h4 id="vagrantfile">Vagrantfile</h4>
+<pre><code class="ruby"># -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = &quot;2&quot;
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = &quot;geerlingguy/centos7&quot;
+  config.vm.hostname = &quot;nodejs.test&quot;
+  config.vm.network :private_network, ip: &quot;192.168.55.55&quot;
+  config.ssh.insert_key = false
+  config.vm.synced_folder &quot;.&quot;, &quot;/vagrant&quot;, disabled: true
+
+  config.vm.provider :virtualbox do |v|
+    v.memory = 256
+  end
+
+  # Ansible provisioner.
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = &quot;provisioning/playbook.yml&quot;
+  end
+end
+</code></pre>
+
+<h4 id="provisioningplaybookyml">provisioning/playbook.yml</h4>
+<pre><code class="yml">---
+- hosts: all
+  become: yes
+
+  vars:
+    node_apps_location: /usr/local/opt/node
+
+  tasks:
+    - name: Install EPEL repo.
+      yum: name=epel-release state=present
+
+    - name: Import Remi GPG key.
+      rpm_key:
+        key: &quot;https://rpms.remirepo.net/RPM-GPG-KEY-remi&quot;
+        state: present
+
+    - name: Install Remi repo.
+      yum:
+        name: &quot;https://rpms.remirepo.net/enterprise/remi-release-7.rpm&quot;
+        state: present
+
+    - name: Ensure firewalld is stopped (since this is a test server).
+      service: name=firewalld state=stopped
+
+    - name: Install Node.js and npm.
+      yum: name=npm state=present enablerepo=epel
+
+    - name: Install Forever (to run our Node.js app).
+      npm: name=forever global=yes state=present
+
+    - name: Ensure Node.js app folder exists.
+      file: &quot;path={{ node_apps_location }} state=directory&quot;
+
+    - name: Copy example Node.js app to server.
+      copy: &quot;src=app dest={{ node_apps_location }}&quot;
+
+    - name: Install app dependencies defined in package.json.
+      npm: &quot;path={{ node_apps_location }}/app&quot;
+
+    - name: Check list of running Node.js apps.
+      command: forever list
+      register: forever_list
+      changed_when: false
+
+    - name: Start example Node.js app.
+      command: &quot;forever start {{ node_apps_location }}/app/app.js&quot;
+      when: &quot;forever_list.stdout.find(node_apps_location + '/app/app.js') == -1&quot;
+</code></pre>
+
+<h4 id="provisioningappappjs">provisioning/app/app.js</h4>
+<pre><code class="js">// Simple Express web server.
+// @see http://howtonode.org/getting-started-with-express
+
+// Load the express module.
+var express = require('express');
+var app = express();
+
+// Respond to requests for / with 'Hello World'.
+app.get('/', function(req, res){
+    res.send('Hello World!');
+});
+
+// Listen on port 80 (like a true web server).
+app.listen(80);
+console.log('Express server started successfully.');
+</code></pre>
+
+<h4 id="provisioningapppackagejson">provisioning/app/package.json</h4>
+<pre><code class="json">{
+  &quot;name&quot;: &quot;examplenodeapp&quot;,
+  &quot;description&quot;: &quot;Example Express Node.js app.&quot;,
+  &quot;author&quot;: &quot;Jeff Geerling &lt;geerlingguy@mac.com&gt;&quot;,
+  &quot;dependencies&quot;: {
+    &quot;express&quot;: &quot;4.x&quot;
+  },
+  &quot;engine&quot;: &quot;node &gt;= 0.10.6&quot;
+}
+</code></pre>
+
+<h4 id="notes">notes</h4>
+<ul>
+<li><code>yum</code> install EPEL repo (and automatically imports GPG key)</li>
+<li><code>rpm_key</code> is a simple module that takes and imports RPM key from URL or file, or the key id of a key that is already present, and ensures the key is either present or absent</li>
+<li>firewall is disabled for testing purposes</li>
+<li><code>yum</code> installs Node.js along with all required packages for <code>npm</code>, allows EPEL repo to be searched via <code>enablerepo</code> parameter (you can explicity disable a repo via <code>disablerepo</code>)</li>
+<li>use <code>npm</code> module to install Node.js utility <code>forever</code> to launch app and keep running, setting <code>global</code> to yes tells NPM to install <code>forever</code> module in <code>/usr/lib/node_modules/</code></li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> quotes are being used in YAML when there are Jinja variable (e.g. <code>{{ var }}</code>) or when there are colons (:) in a string (e.g. URLs)</p>
+</blockquote>
+<ul>
+<li><code>register</code> creates a new variable, <code>forever_list</code>, to be used in next play to determine when to run the play, it stashes the output (stdout, stderr) of defined command in variable passed to it</li>
+<li><code>changed_when</code> tells when this play results in a change to the server, in this case <code>forever list</code> will ever change the server, so we just say <code>false</code></li>
+<li>app is started using 'forever', we could start it by calling <code>node {{ node_apps_location }}/app/app.js</code> but we would not be able to control process easily and would also need to use <code>nohup</code> and <code>&amp;</code> to avoid ansible hanging</li>
+<li>to avoid running multiple instances of node app, we start it using <code>when</code> and tell it to start only when the app's path is not in the <code>forever list</code> output</li>
+</ul>
+<h3 id="real-world-playbook-ubuntu-lamp-server-with-drupal">Real-world playbook: Ubuntu LAMP server with drupal</h3>
+<pre><code>.
+├── Vagrantfile
+└── provisioning
+    ├── ansible.cfg
+    ├── playbook.yml
+    ├── templates
+    │   └── drupal.test.conf.j2
+    └── vars.yml
+
+2 directories, 5 files
+</code></pre>
+
+<h4 id="vagrantfile_1">Vagrantfile</h4>
+<pre><code class="ruby"># -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = &quot;2&quot;
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = &quot;geerlingguy/ubuntu1604&quot;
+  config.vm.network :private_network, ip: &quot;192.168.88.8&quot;
+  config.vm.hostname = &quot;drupal.test&quot;
+  config.ssh.insert_key = false
+
+  config.vm.provider :virtualbox do |v|
+    v.memory = 1024
+  end
+
+  # Ansible provisioning.
+  config.vm.provision &quot;ansible&quot; do |ansible|
+    ansible.playbook = &quot;provisioning/playbook.yml&quot;
+    ansible.config_file = &quot;provisioning/ansible.cfg&quot;
+    ansible.verbose = &quot;vvvv&quot;
+  end
+end
+</code></pre>
+
+<h4 id="provisioningansiblecfg">provisioning/ansible.cfg</h4>
+<pre><code class="cfg">[defaults]
+allow_world_readable_tmpfiles = true
+log_path = /var/log/ansible.log
+</code></pre>
+
+<h4 id="provisioningplaybookyml_1">provisioning/playbook.yml</h4>
+<pre><code class="yml">---
+- hosts: all
+  become: yes
+
+  vars_files:
+    - vars.yml
+
+  pre_tasks:
+    - name: Update apt cache if needed.
+      apt: update_cache=yes cache_valid_time=3600
+
+  handlers:
+    - name: restart apache
+      service: name=apache2 state=restarted
+
+  tasks:
+    - name: Get software for apt repository management.
+      apt:
+        state: present
+        name:
+          - python-apt
+          - python-pycurl
+
+    - name: Add ondrej repository for later versions of PHP.
+      apt_repository: repo='ppa:ondrej/php' update_cache=yes
+
+    - name: &quot;Install Apache, MySQL, PHP, and other dependencies.&quot;
+      apt:
+        state: present
+        name:
+          - git
+          - curl
+          - unzip
+          - sendmail
+          - apache2
+          - php7.1-common
+          - php7.1-cli
+          - php7.1-dev
+          - php7.1-gd
+          - php7.1-curl
+          - php7.1-json
+          - php7.1-opcache
+          - php7.1-xml
+          - php7.1-mbstring
+          - php7.1-pdo
+          - php7.1-mysql
+          - php-apcu
+          - libpcre3-dev
+          - libapache2-mod-php7.1
+          - python-mysqldb
+          - mysql-server
+
+    - name: Disable the firewall (since this is for local dev only).
+      service: name=ufw state=stopped
+
+    - name: &quot;Start Apache, MySQL, and PHP.&quot;
+      service: &quot;name={{ item }} state=started enabled=yes&quot;
+      with_items:
+        - apache2
+        - mysql
+
+    - name: Enable Apache rewrite module (required for Drupal).
+      apache2_module: name=rewrite state=present
+      notify: restart apache
+
+    - name: Add Apache virtualhost for Drupal 8.
+      template:
+        src: &quot;templates/drupal.test.conf.j2&quot;
+        dest: &quot;/etc/apache2/sites-available/{{ domain }}.test.conf&quot;
+        owner: root
+        group: root
+        mode: 0644
+      notify: restart apache
+
+    - name: Symlink Drupal virtualhost to sites-enabled.
+      file:
+        src: &quot;/etc/apache2/sites-available/{{ domain }}.test.conf&quot;
+        dest: &quot;/etc/apache2/sites-enabled/{{ domain }}.test.conf&quot;
+        state: link
+      notify: restart apache
+
+    - name: Remove default virtualhost file.
+      file:
+        path: &quot;/etc/apache2/sites-enabled/000-default.conf&quot;
+        state: absent
+      notify: restart apache
+
+    - name: Adjust OpCache memory setting.
+      lineinfile:
+        dest: &quot;/etc/php/7.1/apache2/conf.d/10-opcache.ini&quot;
+        regexp: &quot;^opcache.memory_consumption&quot;
+        line: &quot;opcache.memory_consumption = 96&quot;
+        state: present
+      notify: restart apache
+
+    - name: Create a MySQL database for Drupal.
+      mysql_db: &quot;db={{ domain }} state=present&quot;
+
+    - name: Create a MySQL user for Drupal.
+      mysql_user:
+        name: &quot;{{ domain }}&quot;
+        password: &quot;1234&quot;
+        priv: &quot;{{ domain }}.*:ALL&quot;
+        host: localhost
+        state: present
+
+    - name: Download Composer installer.
+      get_url:
+        url: https://getcomposer.org/installer
+        dest: /tmp/composer-installer.php
+        mode: 0755
+
+    - name: Run Composer installer.
+      command: &gt;
+        php composer-installer.php
+        chdir=/tmp
+        creates=/usr/local/bin/composer
+
+    - name: Move Composer into globally-accessible location.
+      command: &gt;
+        mv /tmp/composer.phar /usr/local/bin/composer
+        creates=/usr/local/bin/composer
+
+    - name: Check out drush 8.x branch.
+      git:
+        repo: https://github.com/drush-ops/drush.git
+        version: 8.x
+        dest: /opt/drush
+
+    - name: Install Drush dependencies with Composer.
+      command: &gt;
+        /usr/local/bin/composer install
+        chdir=/opt/drush
+        creates=/opt/drush/vendor/autoload.php
+
+    - name: Create drush bin symlink.
+      file:
+        src: /opt/drush/drush
+        dest: /usr/local/bin/drush
+        state: link
+
+    - name: Check out Drupal Core to the Apache docroot.
+      git:
+        repo: https://git.drupal.org/project/drupal.git
+        version: &quot;{{ drupal_core_version }}&quot;
+        dest: &quot;{{ drupal_core_path }}&quot;
+      register: git_checkout
+
+    - name: Ensure Drupal codebase is owned by www-data.
+      file:
+        path: &quot;{{ drupal_core_path }}&quot;
+        owner: www-data
+        group: www-data
+        recurse: true
+      when: git_checkout.changed | bool
+
+    - name: Install Drupal dependencies with Composer.
+      command: &gt;
+        /usr/local/bin/composer install
+        chdir={{ drupal_core_path }}
+        creates={{ drupal_core_path }}/vendor/autoload.php
+      become_user: www-data
+
+    - name: Install Drupal.
+      command: &gt;
+        drush si -y --site-name=&quot;{{ drupal_site_name }}&quot;
+        --account-name=admin
+        --account-pass=admin
+        --db-url=mysql://{{ domain }}:1234@localhost/{{ domain }}
+        --root={{ drupal_core_path }}
+        creates={{ drupal_core_path }}/sites/default/settings.php
+      notify: restart apache
+      become_user: www-data
+</code></pre>
+
+<h4 id="provisioningvarsyml">provisioning/vars.yml</h4>
+<pre><code class="yml">---
+# The core version you want to use (e.g. 8.8.x, 8.9.x).
+drupal_core_version: &quot;8.8.x&quot;
+
+# The path where Drupal will be downloaded and installed.
+drupal_core_path: &quot;/var/www/drupal-{{ drupal_core_version }}-dev&quot;
+
+# The resulting domain will be [domain].test (with .test appended).
+domain: &quot;drupal&quot;
+
+# Your Drupal site name.
+drupal_site_name: &quot;Drupal Test&quot;
+</code></pre>
+
+<h4 id="provisioningtemplatedrupaltestconfj2">provisioning/template/drupal.test.conf.j2</h4>
+<pre><code class="j2">&lt;VirtualHost *:80&gt;
+    ServerAdmin webmaster@localhost
+    ServerName {{ domain }}.test
+    ServerAlias www.{{ domain }}.test
+    DocumentRoot {{ drupal_core_path }}
+    &lt;Directory &quot;{{ drupal_core_path }}&quot;&gt;
+        Options FollowSymLinks Indexes
+        AllowOverride All
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<h4 id="notes_1">notes</h4>
+<ul>
+<li>you can run tasks before or after the main tasks (defined in <code>tasks:</code>) or roles (defined in <code>roles:</code>) using <code>pre_tasks</code> and <code>post_tasks</code></li>
+<li>in this case we ensure apt cache is updated before rest of playbook, and we tell it to update cache if it's more than 3600 seconds (1 hour) since last update</li>
+<li><code>handlers</code> are special kinds of tasks you run at the end of a play by adding <code>notify</code> option to any of the tasks in that group</li>
+<li><code>handlers</code> will only be called if one of the tasks notifying the handler makes a change to the server (and doesn't fail), and it will be notified at the <em>end</em> of the play</li>
+<li>in this case, the handler has been defined to restart <code>apache2</code> service after a configuration change</li>
+<li>just like variables, handlers and tasks may be placed in separate files to keep things tidy</li>
+<li>when a task fails, playbook execution is stopped and handlers aren't notified and triggered</li>
+<li>if oyou want to make sure handlers always run after a task uses <code>notify</code> even after failure, add <code>--force-handlers</code> in your <code>ansible-playbook</code> command</li>
+<li><code>python-apt</code> and <code>python-pycurl</code> are helper libraries that allow python to manage apt more precisely, such as for <code>apt_repository</code> module</li>
+<li><code>linefile</code> module ensures a particular line of text exists or not in a file</li>
+<li><code>command</code> module is preferred option for running commands on a host and it works on most scenarios</li>
+<li>yet <code>command</code> does not run the command via remote shell <code>/bin/sh</code> so options like <code>&lt;, &gt;, |, &amp;</code> and local environment vars like $HOME do not work</li>
+<li><code>shell</code> allows you to pipe command output to other commands, access local environment, etc</li>
+<li><code>script</code> executes shell scripts, though it is always better to use idempotent playbooks</li>
+<li><code>raw</code> executes raw commands via ssh (should only be ever used as a last resort)</li>
+</ul>
+<h3 id="real-world-playbook-ubuntu-server-with-solr">Real-world playbook: Ubuntu server with Solr</h3>
+<pre><code>.
+├── Vagrantfile
+└── provisioning
+    ├── playbook.yml
+    └── vars.yml
+
+1 directory, 3 files
+</code></pre>
+
+<h4 id="vagrantfile_2">Vagrantfile</h4>
+<pre><code class="ruby"># -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = &quot;2&quot;
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = &quot;geerlingguy/ubuntu1604&quot;
+  config.vm.network :private_network, ip: &quot;192.168.66.66&quot;
+  config.vm.hostname = &quot;solr.test&quot;
+  config.ssh.insert_key = false
+
+  config.vm.provider :virtualbox do |v|
+    v.memory = 1024
+  end
+
+  # Ansible provisioner.
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = &quot;provisioning/playbook.yml&quot;
+  end
+end
+</code></pre>
+
+<h4 id="provisioningplaybookyml_2">provisioning/playbook.yml</h4>
+<pre><code class="yml">---
+- hosts: all
+  become: true
+
+  vars_files:
+    - vars.yml
+
+  pre_tasks:
+    - name: Update apt cache if needed.
+      apt: update_cache=true cache_valid_time=3600
+
+  tasks:
+    - name: Install Java.
+      apt: name=openjdk-8-jdk state=present
+
+    - name: Download Solr.
+      get_url:
+        url: &quot;https://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz&quot;
+        dest: &quot;{{ download_dir }}/solr-{{ solr_version }}.tgz&quot;
+        checksum: &quot;{{ solr_checksum }}&quot;
+
+    - name: Expand Solr.
+      unarchive:
+        src: &quot;{{ download_dir }}/solr-{{ solr_version }}.tgz&quot;
+        dest: &quot;{{ download_dir }}&quot;
+        remote_src: true
+        creates: &quot;{{ download_dir }}/solr-{{ solr_version }}/README.txt&quot;
+
+    - name: Run Solr installation script.
+      command: &gt;
+        {{ download_dir }}/solr-{{ solr_version }}/bin/install_solr_service.sh
+        {{ download_dir }}/solr-{{ solr_version }}.tgz
+        -i /opt
+        -d /var/solr
+        -u solr
+        -s solr
+        -p 8983
+        creates={{ solr_dir }}/bin/solr
+
+    - name: Ensure solr is started and enabled on boot.
+      service: name=solr state=started enabled=yes
+</code></pre>
+
+<h4 id="provisioningvarsyml_1">provisioning/vars.yml</h4>
+<pre><code class="yml">---
+# The directory into which Solr will be downloaded for setup.
+download_dir: /tmp
+
+# The directory inside which Solr will be installed.
+solr_dir: /opt/solr
+
+# Solr version and download information.
+solr_version: 8.2.0
+solr_checksum: sha512:beb4e37fc21bf483e3b6bae43cb06a49bc420a0f2b920c97909a69a5efeacba1e7d2ff09ae8018446c87bf007f88f06a59de73cd1923f0967e8206629b0509b6
+</code></pre>
+
+<h4 id="notes_2">notes</h4>
+<ul>
+<li>when downloading files from remote servers, <code>get_url</code> module provides more flexibility than raw <code>wget</code> or <code>curl</code> commands</li>
+<li>use a full path to download file otherwise it will be re-downloaded on subsequent runs of the playbook</li>
+<li>you can use checksum to make sure it is the file you are expecting, if it doesn't match the file will be discarded</li>
+<li>when using <code>unarchive</code> we use <code>creates</code> option to make operation idempotent</li>
+<li><code>unarchive</code> module docs show you can consolidate <code>get_url</code> and <code>unarchive</code> into one task, but since Solr installation requires original archive to be present we still need both tasks</li>
+</ul>
+<h2 id="chapter-5-ansible-playbook-beyond-the-basics">Chapter 5 - Ansible Playbook - Beyond the Basics</h2>
+<h3 id="handlers">Handlers</h3>
+<ul>
+<li>previously we used a simple handler to restart Apache, and tasks that affected Apache configs notified the handler with the option <code>notify: restart apache</code></li>
+</ul>
+<pre><code class="yml">handlers:
+  - name: restart apache
+    service: name=apache2 state=restarted
+
+tasks:
+  - name: Enable Apache rewrite module
+    apache2_module: name=rewrite state=present
+    notify: restart apache
+</code></pre>
+
+<ul>
+<li>if you want to notify multiple handlers from one task, use a list for <code>notify</code> option</li>
+</ul>
+<pre><code class="yml">- name: Rebuild application configuration
+  command: /opt/app/rebuild.sh
+  notify:
+    - restart apache
+    - restart memcached
+</code></pre>
+
+<ul>
+<li>you can have handlers notify other handlers by adding a <code>notify</code> option</li>
+</ul>
+<pre><code class="yml">handlers:
+  - name: restart apache
+    service: name=apache2 state=restarted
+    notify: restart memcached
+
+  - name: restart memcached
+    service: name=memcached state=restarted
+</code></pre>
+
+<ul>
+<li>handlers will only run if a task notifies the handler</li>
+<li>handlers will run only once at the end of the play</li>
+<li>if you need to override run once behaviour, use <code>meta: flush_handlers</code></li>
+<li>if play fails on a host before handlers are notified, handlers will never be run</li>
+<li>if you want handlers to run even when play has failed, you can use <code>meta</code> module or <code>--force-handlers</code> flag</li>
+</ul>
+<h3 id="environmental-variables">Environmental variables</h3>
+<ul>
+<li>there are multiple ways to work with env vars</li>
+<li>if you want to set env vars for remote user account you can add lines to user's .bash_profile</li>
+</ul>
+<pre><code class="yml">- name: Add an environment variable to the remote user shell
+  lineinfile: &quot;dest=~/.bash_profile regexp=^ENV_VAR= line=ENV_VAR=value&quot;
+</code></pre>
+
+<ul>
+<li>all subsequent <code>shell</code> tasks will have access to this env variable, since only <code>shell</code> module understands shell commands that use env var</li>
+<li>to use an env var in further tasks, it's best to use a task <code>register</code> option to store env var in a variable Ansible can later use</li>
+</ul>
+<pre><code class="yml">- name: Add an environment variable to the remote user shell
+  lineinfile: &quot;dest=~/.bash_profile regexp=^ENV_VAR= line=ENV_VAR=value&quot;
+
+- name: Get the value of the environment variable we just added
+  shell: 'source ~/.bash_profile &amp;&amp; echo $ENV_VAR'
+  register: foo
+
+- name: Print the value of the environment variable
+  debug: msg=&quot;The variable is {{ foo.stdout }}
+</code></pre>
+
+<ul>
+<li>we use <code>source ~/.bash_profile</code> to make sure we are using the latest env config for the remote user</li>
+<li>in some situations, the tasks all run over a persistent or semi-cached SSH session, over which <code>$ENV_VAR</code> would not yet be defined </li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> there are many diff places you can store env vars, like <code>.bashrc</code>, <code>.profile</code>, and <code>.bash_login</code> in a user home folder. In this case we want the env var to be available to Ansible, which runs a pseudo-TTY shell session, in which case <code>~/.bash_profile</code> is used to configure the environment. You can read more in <a href="http://mywiki.wooledge.org/DotFiles">Configuring your login sessions with dotfiles</a></p>
+</blockquote>
+<ul>
+<li>Linux will also read global env vars added to `/etc/environment so you can add your variable there</li>
+</ul>
+<pre><code class="yml">- name: Add a global environment variable
+  lineinfile: &quot;dest=/etc/environment regexp=^ENV_VAR= line=ENV_VAR=value&quot;
+  become: yes
+</code></pre>
+
+<ul>
+<li>if you require many env vars to be set, you might consider <code>copy</code> or <code>template</code> with a local file</li>
+</ul>
+<h4 id="pre-play-environment-variables">Pre-play environment variables</h4>
+<ul>
+<li>you can set the environment for just one play using <code>environment</code> option for that play</li>
+</ul>
+<pre><code class="yml">- name: Download a file using example-proxy as a proxy
+  get_url: url=http://www.example.com/file.tar.gz dest=~/Downloads/
+  environment:
+    http_proxy: http://example-proxy:80/
+</code></pre>
+
+<ul>
+<li>if you have many tasks that require a proxy, or some env var, you can pass them via your playbook <code>vars</code> section</li>
+</ul>
+<pre><code class="yml">vars:
+  proxy_vars:
+    http_proxy: http://example-proxy:80/
+    https_proxy: https://example-proxy:443/
+
+tasks:
+  - name: Download a file using example-proxy as a proxy
+    get_url: url=http://www.example.com/file.tar.gz dest=~/Downloads/
+    environment: proxy_vars
+</code></pre>
+
+<ul>
+<li>if a proxy needs to be set system-wide you can do so using global <code>/etc/environment</code> file</li>
+</ul>
+<pre><code class="yml"># In the 'vars' section of the playbook (set to 'absent' to disable proxy)
+proxy_state: present
+
+# in the 'tasks' section of the playbook
+- name: Configure the proxy
+  lineinfile:
+    dest: /etc/environment
+    regexp: &quot;{{ item.regexp }}&quot;
+    line: &quot;{{ item.line }}&quot;
+    state: &quot;{{ proxy_state }}&quot;
+  with_items:
+    - regexp: &quot;^http_proxy=&quot;
+      line: &quot;http_proxy=http://example-proxy:80/&quot;
+    - regexp: &quot;^https_proxy=&quot;
+      line: &quot;https_proxy=https://example-proxy:443/&quot;
+    - regexp: &quot;^ftp_proxy=&quot;
+      line: &quot;ftp_proxy=http://example-proxy:80/&quot;
+</code></pre>
+
+<ul>
+<li>doing it this way allows us to configure whether the proxy is enabled per-server (using the <code>proxy_state</code> var) with one play</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> you can test remote env vars using the <code>ansible</code> command <code>ansible test -m shell -a 'echo $TEST'</code>. Be careful when doing so as using the wrong quotes you might end up printing a local env var instead of the remote server</p>
+</blockquote>
+<h3 id="variables">Variables</h3>
+<ul>
+<li>variables always begin with a letter <code>[A-Za-z]</code>, can include underscores or numbers <code>[0-9]</code></li>
+<li>the standard is to use all lowercase and avoid using numbers</li>
+<li>valid variable names include <code>foo</code>, <code>foo_bar</code>, <code>foo_bar_5</code>, and <code>fooBar</code></li>
+<li>invalid variable names include <code>_foo</code>, <code>foo-bar</code>, <code>5_foo_bar</code>, <code>foo.bar</code>, <code>foo bar</code></li>
+<li>in an inventory file a variable value is assigned using <code>foo=bar</code></li>
+<li>in a playbook or variables include file, a variable value is assigned using <code>foo: bar</code></li>
+</ul>
+<h4 id="playbook-variables">Playbook Variables</h4>
+<ul>
+<li>variables can be passed via command line when calling <code>ansible-playbook</code> with <code>--extra-vars</code> option</li>
+</ul>
+<pre><code class="sh">ansible-playbook example.yml --extra-vars &quot;foo=bar&quot;
+</code></pre>
+
+<ul>
+<li>you can pass extra variables using quoted JSON, YAML or even by passing JSON or YAML file directly, like <code>--extra-vars "@even_more_vars.json"</code> or <code>--extra-vars "@even_more_vars.yml"</code></li>
+<li>variables may be included inline with the rest of a playbook in a <code>vars</code> section</li>
+</ul>
+<pre><code class="yml">---
+- hosts: example
+  vars:
+    foo: bar
+  tasks:
+    # Prints &quot;Variable 'foo' is set to bar&quot;
+    - debug: msg=&quot;Variable 'foo' is set to {{ foo }}&quot;
+</code></pre>
+
+<ul>
+<li>variables may also be included in a separate file using <code>vars_files</code> section</li>
+</ul>
+<pre><code class="yml">---
+# Main playbook file`
+- hosts: example
+  vars_files:
+    - vars.yml
+  tasks:
+    - debug: msg=&quot;Variable 'foo' is set to {{ foo }}&quot;
+</code></pre>
+
+<pre><code class="yml">---
+# Variables file 'vars.yml' in the same folder as the playbook
+foo: bar
+</code></pre>
+
+<ul>
+<li>notice that when in a standalone file, vars are all at the root level of the YAML file</li>
+<li>variable files can also be imported conditionally, say for example on CentOS the apache service is named <code>httpd</code> and on Debian the apache service is called <code>apache2</code></li>
+</ul>
+<pre><code class="yml">---
+- hosts: example
+  vars_files:
+    - &quot;apache_default.yml&quot;
+    - &quot;apache_{{ ansible_os_family }}.yml&quot;
+  tasks:
+    - service: name={{ apache }} state=running
+</code></pre>
+
+<ul>
+<li>then add <code>apache_CentOS.yml</code> and <code>apache_default.yml</code> in the playbook folder, and define <code>apache: httpd</code> in CentOS file and <code>apache: apache2</code> in the default file</li>
+<li>as long as you do not disable <code>gather_facts</code> (or if you run a <code>setup</code> task at some pont to gather facts manually), ansible stores the OS of the server in the variable <code>ansible_os_family</code> and will include the vars file with the resulting name</li>
+<li>if ansible cannot find the file with that name, it will use variables loaded from the first loaded file <code>apache_default.yml</code></li>
+</ul>
+<h4 id="inventory-variables">Inventory variables</h4>
+<ul>
+<li>variables can be added via inventory files, either inline with a host definition, or after a group</li>
+</ul>
+<pre><code class="cfg"># Host specific variables (defined inline)
+[washington]
+app1.example.com proxy_state=present
+app2.example.com proxy_state=absent
+
+# Variables defined for the entire group
+[washington:vars]
+cdn_host=washington.static.example.com
+api_version=3.0.1
+</code></pre>
+
+<ul>
+<li>ansible documentation reccomds <em>not</em> storing variables within the inventory file</li>
+<li>you can use <code>group_vars</code> and <code>host_vars</code> YAML variable files with a specific path and they will be assigned to hosts and groups defined</li>
+<li>if you want to apply a set of variables to host <code>app1.example.com</code> create a blank file named <code>app1.example.com</code> at <code>/etc/ansible/host_vars/app1.example.com</code> and add variables </li>
+</ul>
+<pre><code class="yml">---
+foo: bar
+bar: qux
+</code></pre>
+
+<ul>
+<li>to apply a set of variables to the entire <code>washington</code> group, create a blank file at location <code>/etc/ansible/group_vars/washington</code></li>
+<li>you can also put files in <code>host_vars</code> or <code>group_vars</code> directories in playbook directory, ansible will use variables defined in the in the <code>/etc/ansible</code> directory first, then those defined in playbook directories</li>
+<li>you can also use <code>group_vars/all/</code> file that would apply to <em>all</em> groups</li>
+</ul>
+<h4 id="registeted-variables">Registeted Variables</h4>
+<ul>
+<li>you can use <code>register</code> to store output of a particular command in a variable at runtime</li>
+</ul>
+<pre><code class="yml">- name: Check list of running Node.js apps.
+  command: forever list
+  register: forever_list
+  changed_when: false
+
+- name: Start example Node.js app.
+  command: &quot;forever start {{ node_apps_location }}/app/app.js&quot;
+  when: &quot;forever_list.stdout.find(node_apps_location + '/app/app.js') == -1&quot;
+</code></pre>
+
+<h4 id="accessing-variables">Accessing Variables</h4>
+<ul>
+<li>simple variables can be used as part of a task using syntax like <code>{{ variable }}</code></li>
+</ul>
+<pre><code class="yml">- command: /opt/my-app/rebuild {{ my_environment }}
+</code></pre>
+
+<ul>
+<li>when command is run, contents of <code>my_environment</code> will be substituted so the resulting command will be something like <code>/opt/my-app/rebuild dev</code></li>
+<li>if you define a list variable like:</li>
+</ul>
+<pre><code class="yml">foo_list:
+  - one
+  - two
+  - three
+</code></pre>
+
+<ul>
+<li>you could access the first term in the array with either of <code>foo[0]</code> or <code>foo|first</code></li>
+<li>the first one uses standard Python array syntax, the second one uses a <em>filter</em> provided by Jinja</li>
+<li>you can access any part of the array by drilling through array keys, either using bracket or dot sytax</li>
+</ul>
+<pre><code class="yml">---
+- hosts: localhost
+
+  tasks:
+    - debug: var=ansible_en0
+</code></pre>
+
+<pre><code class="sh">PLAY [localhost] **********************************************************************************************************************************
+
+TASK [Gathering Facts] ****************************************************************************************************************************
+ok: [localhost]
+
+TASK [debug] **************************************************************************************************************************************
+ok: [localhost] =&gt; {
+    &quot;ansible_en0&quot;: {
+        &quot;device&quot;: &quot;en0&quot;,
+        &quot;flags&quot;: [
+            &quot;UP&quot;,
+            &quot;BROADCAST&quot;,
+            &quot;SMART&quot;,
+            &quot;RUNNING&quot;,
+            &quot;SIMPLEX&quot;,
+            &quot;MULTICAST&quot;
+        ],
+        &quot;ipv4&quot;: [
+            {
+                &quot;address&quot;: &quot;192.168.0.15&quot;,
+                &quot;broadcast&quot;: &quot;192.168.0.255&quot;,
+                &quot;netmask&quot;: &quot;255.255.255.0&quot;,
+                &quot;network&quot;: &quot;192.168.0.0&quot;
+            }
+        ],
+        &quot;ipv6&quot;: [
+            {
+                &quot;address&quot;: &quot;fe80::1086:e144:3e2:9c56%en0&quot;,
+                &quot;prefix&quot;: &quot;64&quot;
+            }
+        ],
+        &quot;macaddress&quot;: &quot;6c:96:cf:db:cb:4f&quot;,
+        &quot;media&quot;: &quot;Unknown&quot;,
+        &quot;media_select&quot;: &quot;autoselect&quot;,
+        &quot;mtu&quot;: &quot;1500&quot;,
+        &quot;options&quot;: [
+            &quot;PERFORMNUD&quot;,
+            &quot;DAD&quot;
+        ],
+        &quot;status&quot;: &quot;active&quot;,
+        &quot;type&quot;: &quot;ether&quot;
+    }
+}
+
+PLAY RECAP ****************************************************************************************************************************************
+localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+</code></pre>
+
+<ul>
+<li>now that you know the structure of the variable, you can access it using one of the following techniques</li>
+</ul>
+<pre><code>{{ ansible_en0.ipv4.address }}
+{{ ansible_en0['ipv4']['address'] }}
+</code></pre>
+
+<h4 id="magic-variables-with-host-and-group-variables-and-information">Magic variables with host and group variables and information</h4>
+<ul>
+<li>if you need to retrieve a specific host variables from another host, uou can use magic <code>hostvars</code> variable which contains all the defined host variables (from inventory files and any discovered YAML files inside <code>host_vars</code> directories</li>
+</ul>
+<pre><code># From any host, returns &quot;jane&quot;
+{{ hostvars['host1']['admin_user']
+</code></pre>
+
+<ul>
+<li>other variables you may need to use from time to time</li>
+<li><code>groups</code> - list of all group names in inventory</li>
+<li><code>group_names</code> - list of all groups of which the <em>current</em> host is a part of</li>
+<li><code>inventory_hostname</code> - hostname of current host according to <code>inventory</code>, can differ from <code>ansible_hostname</code> which is hostname reported by system</li>
+<li><code>inventory_hostname_short</code> - first part of <code>inventory_hostname</code> up to first period</li>
+<li><code>play_hosts</code> - all hosts on which current play will be run</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> you can read more at <a href="http://docs.ansible.com/playbooks_variables.html%23magic-variables-and-how-to-access-information-about-other-hosts">Magic Variables, and How To Access Information About Other Hosts</a></p>
+</blockquote>
+<h3 id="facts-variables-derived-from-system-info">Facts (Variables derived from system info)</h3>
+<ul>
+<li>whenever you run a playbook, ansible first gathers information about each host in play</li>
+<li>facts cab gather information like host IP Addresses, CPU Type, disk space, operating system information, and network interface information to change when certain tasks are run or change certain information in config files</li>
+<li>to get a list of every gathered fact available you can use <code>ansible &lt;host&gt; -m setup</code></li>
+<li>if you do not need to use facts and need to save a few seconds per host you can set <code>gather_facts: no</code> in your playbook</li>
+</ul>
+<pre><code class="yml">- hosts: db
+  gather_facts: no
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> if you have Facter or Ohai installed on a remote host, ansible will oalso include their facts prefixed by <code>facter_</code> and <code>ohai_</code>
+<strong>Note:</strong> when running playbooks against diff OSes, virtualization stacks or hosting providers, some facts may contian different information than what you are expecting</p>
+</blockquote>
+<h4 id="local-facts-factsd">Local Facts (Facts.d)</h4>
+<ul>
+<li>another way of defining host-specific facts is to place a <code>.fact</code> file in a special directory on remote hosts <code>/etc/ansible/facts.d/</code></li>
+<li>these files can be either JSON or INI files, or you could use executables that return JSON</li>
+<li>example create `/etc/ansible/facts.d/settings.fact on a remote host</li>
+</ul>
+<pre><code class="ini">[users]
+admin=jane,john
+normal=jim
+</code></pre>
+
+<pre><code class="sh">ansible nodejs -m setup -i hosts -a &quot;filter=ansible_local&quot;
+</code></pre>
+
+<pre><code>192.168.55.55 | SUCCESS =&gt; {
+    &quot;ansible_facts&quot;: {
+        &quot;ansible_local&quot;: {
+            &quot;settings&quot;: {
+                &quot;users&quot;: {
+                    &quot;admin&quot;: &quot;jane,john&quot;,
+                    &quot;normal&quot;: &quot;jim&quot;
+                }
+            }
+        },
+        &quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python&quot;
+    },
+    &quot;changed&quot;: false
+}
+</code></pre>
+
+<ul>
+<li>if part of a playbook adds a local <code>.fact</code> file, you can explicitly reload the local facts</li>
+</ul>
+<pre><code class="yml">- name: Reload local facts
+  setup: filter=ansible_local
+</code></pre>
+
+<h3 id="ansible-vault-keeping-secrets-secret">Ansible Vault - keeping secrets secret</h3>
+<ul>
+<li>there are two primary ways to store sensitive data</li>
+<li>use a separate secret managment service such as <a href="https://vaultproject.io/">Vault</a> by HashiCorp, <a href="http://square.github.io/keywhiz/">Keywhiz</a> by square, or a hosted service like AWS <a href="https://aws.amazon.com/kms/">Key Management Service</a> or Azure <a href="http://azure.microsoft.com/en-us/services/key-vault/">Key Vault</a></li>
+<li>use Ansible Vault, built into Ansible and stores encrypted passwords and other sensitive data alongside playbook</li>
+<li>Ansible Vault works much like a real world vault</li>
+<li>any YAML file you would normally have in your playbook, (e.g. variables file, host vars, group vars, default vars, or even task includes) and store it in the vault</li>
+<li>encrypts the vault using a key (a password you set)</li>
+<li>store the key separately from the playbook in a location you control</li>
+<li>use the key to let ansible decrypt the vault whenever you run your playbook</li>
+<li>the following is a playbook that connects to a service API and requires a secure API key to do so</li>
+</ul>
+<pre><code class="yml">---
+- hosts: appserver
+
+  vars_files:
+    - vars/api_key.yml
+
+  tasks:
+    - name: Conect to service with our API key
+      command: connect_to_service
+      environment:
+        SERVICE_API_KEY: &quot;{{ myapp_service_api_key }}&quot;
+</code></pre>
+
+<ul>
+<li>the vars file which is stored alongside the playbook in plain text</li>
+</ul>
+<pre><code class="yml">---
+myapp_service_api_key: &quot;asfaASF9rqasfa92SDAA2ADAS&quot;
+</code></pre>
+
+<ul>
+<li>it is not safe to store API keys in plain text, secrets should be encrypted</li>
+<li>to encrypt the file with Vault run the following</li>
+</ul>
+<pre><code class="sh">ansible-vault encrypt api_key.yml
+</code></pre>
+
+<ul>
+<li>enter passwords and the file should look like this</li>
+</ul>
+<pre><code>$ANSIBLE_VAULT;1.1;AES256
+66376632666135326131323637376436376466636361613266376530623731393535636532656338
+3136306431353132316537393238363830356437303265650a623766373235303638633861346161
+63646563356564636236376235386266393766653666323765626436386165376233636633323165
+3734623462356566360a356465303238323333666134613161653832376461333666383833323933
+64633539613631363935386639333962356637326639326431663131383732373965373038633038
+31316230373664623333303537336436323633396635626362363338333265333865343930353433
+613066653633643637363931346265376139
+</code></pre>
+
+<ul>
+<li>the next time you run playbook you need to provide password so that it can be decrypted in memory</li>
+<li>there are a number of ways you can provide the password depending on how you run the playbook</li>
+<li>you can provide the password at runtime when running playbook interactively</li>
+</ul>
+<pre><code class="sh">ansible-playbook test.yml --ask-vault-pass
+</code></pre>
+
+<ul>
+<li>you can edit the encrypted file with </li>
+</ul>
+<pre><code class="sh">ansible-vault edit api_key.yml
+</code></pre>
+
+<ul>
+<li><code>rekey</code> - change a file password</li>
+<li><code>create</code> - create a new file</li>
+<li><code>view</code> - view an existing file</li>
+<li><code>decrypt</code> - decrypt a file</li>
+<li>all these controls can be used with one or multiple files</li>
+</ul>
+<pre><code class="sh">ansible-vault create x.yml y.yml z.yml
+</code></pre>
+
+<ul>
+<li>for convenience or automated playbook runs you can supply vault password via a password file</li>
+<li>just like keys in <code>~/.ssh</code> folder, you should set strict permissions <code>600</code> so that only you can read or write this file</li>
+<li>create the file <code>~/.ansible/vault_pass.txt</code> with your password in it, set permissions to <code>600</code> and tell ansible the location of the file when you run the playbook</li>
+</ul>
+<pre><code class="sh">ansible-playbook test.yml --vault-password-file ~/.ansible/vault_pass.txt
+</code></pre>
+
+<ul>
+<li>you can also use an executable script (e.g. <code>~/.ansible/vault_pass.py</code>) with execute permissions <code>700</code>) as long as the script outputs a single line of text, the vault password</li>
+<li>you can make vault operations slightly faster by installing python <code>cryptography</code> library <code>pip install cryptography</code></li>
+</ul>
+<h3 id="variable-precedence">Variable Precedence</h3>
+<ol>
+<li><code>--extra-vars</code> passed in via the command line (these always win, no matter what).</li>
+<li>Task-level vars (in a task block).</li>
+<li>Block-level vars (for all tasks in a block).</li>
+<li>Role vars (e.g. <code>[role]/vars/main.yml</code>) and vars from <code>include_vars</code> module.</li>
+<li>Vars set via <code>set_facts</code> modules.</li>
+<li>Vars set via <code>register</code> in a task.</li>
+<li>Individual play-level vars: 1. <code>vars_files</code> 2. <code>vars_prompt</code> 3. <code>vars</code></li>
+<li>Host facts.</li>
+<li>Playbook <code>host_vars</code>.</li>
+<li>Playbook <code>group_vars</code>.</li>
+<li>Inventory: 1. <code>host_vars</code> 2. <code>group_vars</code> 3. <code>vars</code></li>
+<li>Role default vars (e.g. <code>[role]/defaults/main.yml</code>).</li>
+</ol>
+<hr />
+<ul>
+<li>Roles (to be discussed in the next chapter) should provide sane default values via the role <code>defaults</code> variables. These variables will be the fallback in case the variable is not defined anywhere else in the chain.</li>
+<li>Playbooks should rarely define variables (e.g. via <code>set_fact</code>), but rather, variables should be defined either in included <code>vars_files</code> or, less often, via inventory.</li>
+<li>Only truly host- or group-specific variables should be defined in host or group inventories.</li>
+<li>Dynamic and static inventory sources should contain a minimum of variables, especially as these variables are often less visible to those maintaining a particular playbook.</li>
+<li>Command line variables (-e) should be avoided when possible. One of the main use cases is when doing local testing or running one-off playbooks where you aren't worried about the maintainability or idempotence of the tasks you're running.</li>
+</ul>
+<h3 id="ifthenwhen-conditionals">If/then/when - Conditionals</h3>
+<ul>
+<li>some tasks use modules with built-in idempotence and you usually don't need to define conditional behaviour</li>
+<li>many tasks, especially <code>command</code> or <code>shell</code> modules , need input as to when they are supposed to run</li>
+</ul>
+<h4 id="jinja-expression-python-built-ins-and-logic">Jinja Expression, Python built-ins and Logic</h4>
+<ul>
+<li>Jinja allows the definitions of literals like strings <code>("string")</code>, integers (<code>42</code>), floats (<code>42.33</code>), lists (<code>[1, 2, 3]</code>), tuples (like lists but cannot be modified), dictionaries (<code>{key: value, key2: value2}</code>) and booleans (<code>true</code> or <code>false</code>)</li>
+<li>Jinja allows basic math operations, like addition, subtraction, multiplication, division, comparisions (<code>==</code>, <code>!=</code>, <code>&gt;=</code> greater or equal to, etc), logical operartors <code>and</code>, <code>or</code>, <code>not</code></li>
+</ul>
+<pre><code class="python"># the following expressions evaulate to 'true'
+1 in [1, 2, 3]
+'see' in 'Can you see me?'
+foo != bar
+(1 &lt; 2) and ('a' not in 'best')
+
+# The following expressions evaluate to 'false':
+4 in [1, 2, 3]
+foo == bar
+(foo != foo) or (a in [1, 2, 3])
+</code></pre>
+
+<ul>
+<li>Jinja also offers a set of 'tests' like <code>foo is defined</code></li>
+<li>when Jinja does not provide enough power you can invoke Python built-in library like <code>string.split</code> and <code>[number].is_signed()</code></li>
+</ul>
+<h4 id="register">register</h4>
+<ul>
+<li>any play can <code>register</code> a variable, and once registered it will be available to all subsequent tasks</li>
+<li>you can register the output of a shell command in a variable using the following syntax</li>
+</ul>
+<pre><code class="yml">- shell: my_command_here
+  register: my_command_result
+</code></pre>
+
+<ul>
+<li>you can access stdout with <code>my_command_result.stdout</code> and stderr with <code>my_command_result.stderr</code></li>
+<li>if you want to see diff properties of a registered variable, run a playbook with <code>-v</code> to inspect play output</li>
+</ul>
+<h4 id="when">when</h4>
+<pre><code class="yml">- yum: name=mysql-server state=present
+  when: is_db_server
+</code></pre>
+
+<ul>
+<li>the above assumes you have defined <code>is_db_server</code> as a boolean earlier and will run the play if the value is true, or skip otherwise</li>
+<li>if you only define <code>is_db_server</code> on database servers, you could run tasks conditionally like so</li>
+</ul>
+<pre><code class="yml">- yum: name=mysql-server state=present
+  when: (is_db_server is defined) and is_db_server
+</code></pre>
+
+<ul>
+<li>you can check the status of a running application and run a play only when application reports it is 'ready' in its output</li>
+</ul>
+<pre><code class="yml">- command: my-app --status
+  register: myapp_result
+
+- command: do-something-to-my-app
+  when: &quot;'ready' in myapp_result.stdout&quot;
+</code></pre>
+
+<ul>
+<li>the following are some real-world examples</li>
+</ul>
+<pre><code class="yml"># From our Node.js playbook - register a command's output, then see
+# if the path to our app is in the output. Start the app if it's
+# not present.
+- command: forever list
+  register: forever_list
+- command: forever start /path/to/app/app.js
+  when: &quot;forever_list.stdout.find('/path/to/app/app.js') == -1&quot;
+
+# Run 'ping-hosts.sh' script if 'ping_hosts' variable is true.
+- command: /usr/local/bin/ping-hosts.sh
+  when: ping_hosts
+
+# Run 'git-cleanup.sh' script if a branch we're interested in is
+# missing from git's list of branches in our project.
+- command: chdir=/path/to/project git branch
+  register: git_branches
+- command: /path/to/project/scripts/git-cleanup.sh
+  when: &quot;(is_app_server == true) and ('interesting-branch' not in \
+  git_branches.stdout)&quot;
+
+# Downgrade PHP version if the current version contains '7.0'.
+- shell: php --version
+  register: php_version
+- shell: yum -y downgrade php*
+  when: &quot;'7.0' in php_version.stdout&quot;
+
+# Copy a file to the remote server if the hosts file doesn't exist.
+- stat: path=/etc/hosts
+  register: hosts_file
+- copy: src=path/to/local/file dest=/path/to/remote/file
+  when: hosts_file.stat.exists == false
+</code></pre>
+
+<h4 id="changed_when-and-failed_when">changed_when and failed_when</h4>
+<ul>
+<li>it is difficult for ansible to determine if a given command results in changes</li>
+<li>if we use <code>command</code> or <code>shell</code> module without using <code>changed_when</code> ansible will always report a change</li>
+<li>most modules report whether they resulted in changes correctly, but you can override this behaviourby invoking <code>changed_when</code></li>
+</ul>
+<pre><code class="yml"># check if php composer install something or not
+- name: Install dependencies via Composer.
+  command: &quot;/usr/local/bin/composer global require phpunit/phpunit --prefer-dist&quot;
+  register: composer
+  changed_when: &quot;'Nothing to install' not in composer.stdout&quot;
+</code></pre>
+
+<ul>
+<li>many command-line utilities print results to stderr instead of stdout, so <code>failed_when</code> can be used to tell when a task has actually failed and is not reporting its results in the wrong way</li>
+</ul>
+<pre><code class="yml">- name: Import a Jenkins job via CLI.
+  shell: &gt;
+    java -jar /opt/jenkins-cli.jar -s http://localhost:8080/
+    create-job &quot;My Job&quot; &lt; /usr/local/my-job.xml
+  register: import
+  failed_when: &quot;import.stderr and 'exists' not in import.stderr&quot;
+</code></pre>
+
+<h4 id="ignore_errors">ignore_errors</h4>
+<ul>
+<li>sometimes there are commands that should always run and they often report errors</li>
+<li>in these cases you can add <code>ignore_errors: true</code> to the task and it will remain unaware of any problems running with a particular task</li>
+<li>it is usually best to find a way to work with and around the errors genearted so that playbooks <em>do</em> fail if there are actual problems</li>
+</ul>
+<h3 id="delegation-local-actions-and-pauses">Delegation, Local Actions and Pauses</h3>
+<ul>
+<li>some tasks, like sending a notification, communicating with load balancers, or making changes to DNS, networking or monitoring servers, require Ansible to run the task on the host machine (running the playbook) or another host besides the one being managed by the playbook</li>
+<li>you can delegate tasks to a particular host using <code>delegate_to</code></li>
+</ul>
+<pre><code class="yml">- name: Add server to Munin monitoring configuration.
+  command: monitor-server webservers {{ inventory_hostname }}
+  delegate_to: &quot;{{ monitoring_master }}&quot;
+</code></pre>
+
+<ul>
+<li>delegation is often used to manage a server participation in a load balancer or replication pool</li>
+<li>you can either run a command locally or use one of Ansible built-in modules</li>
+</ul>
+<pre><code class="yml">- name: Remove server from load balancer.
+  command: remove-from-lb {{ inventory_hostname }}
+  delegate_to: 127.0.0.1
+</code></pre>
+
+<ul>
+<li>if delegating to localhost, you can use shorthand <code>local_action</code></li>
+</ul>
+<pre><code class="yml">- name: Remove server from load balancer.
+  local_action: command remove-from-lb {{ inventory_hostname }}
+</code></pre>
+
+<h4 id="pausing-playbook-execution-with-wait_for">Pausing playbook execution with wait_for</h4>
+<ul>
+<li>you might also use <code>local_action</code> in the middle of a playbook to wait for a freshly-booted server or application to start listening on a port</li>
+</ul>
+<pre><code class="yml">- name: Wait for web server to start.
+  local_action:
+    module: wait_for
+    host: &quot;{{ inventory_hostname }}&quot;
+    port: &quot;{{ webserver_port }}&quot;
+    delay: 10
+    timeout: 300
+    state: started
+</code></pre>
+
+<ul>
+<li>the above tasks wait until <code>webserver_port</code> is open on <code>inventory_hostname</code> as checked from the host running the ansible playbook with a 5-minute timeout (and 10 second check interval)</li>
+<li><code>wait_for</code> can be used to pause for many different things</li>
+<li>Using <code>host</code> and <code>port</code>, wait a maximum of <code>timeout</code> seconds for the port to be available (or not).</li>
+<li>Using <code>path</code> (and <code>search_regex</code> if desired), wait a maximum of <code>timeout</code> seconds for the file to be present (or absent).</li>
+<li>Using <code>host</code> and <code>port</code> and <code>drained</code> for the state parameter, check if a given port has drained all it's active connections.</li>
+<li>Using <code>delay</code>, you can simply pause playbook execution for a given amount of time (in seconds).</li>
+</ul>
+<h4 id="running-an-entire-playbook-locally">Running an entire playbook locally</h4>
+<ul>
+<li>you can use <code>--conection=local</code> to speed up playbook execution by avoiding SSH connection overhead when you need to run a playbook locally</li>
+</ul>
+<pre><code class="yml">---
+- hosts: 127.0.0.1
+  gather_facts: no
+
+  tasks:
+    - name: Check the current system date.
+      command: date
+      register: date
+
+    - name: Print the current system date.
+      debug: var=date.stdout
+</code></pre>
+
+<pre><code class="sh">ansible-playbook test.yml --conection=local
+</code></pre>
+
+<h3 id="prompts">Prompts</h3>
+<ul>
+<li>you can use <code>vars_prompt</code> to prompt for user input if there is no other way this information can be configured (e.g. environment variables, inventory variables, etc)</li>
+</ul>
+<pre><code class="yml">---
+- hosts: all
+
+  vars_prompt:
+    - name: share_user
+      prompt: &quot;What is your network username?&quot;
+
+    - name: share_pass
+      prompt: &quot;What is your network password?&quot;
+      private: yes
+</code></pre>
+
+<ul>
+<li>there are a few special options you can add to prompts</li>
+<li><code>private</code>: If set to <code>yes</code>, the user's input will be hidden on the command line.</li>
+<li><code>default</code>: You can set a default value for the prompt, to save time for the end user.</li>
+<li><code>encrypt</code> / <code>confirm</code> / <code>salt_size</code>: These values can be set for passwords so you can verify the entry (the user will have to enter the password twice if <code>confirm</code> is set to <code>yes</code>), and encrypt it using a salt (with the specified size and crypt scheme).</li>
+<li>you should avoid prompts unless absolutely necessary</li>
+</ul>
+<h3 id="tags">Tags</h3>
+<ul>
+<li>tags allow to run (or exclude) subsets of a playbook tasks</li>
+<li>you can tag roles, included files, individual tasks, and entire plays</li>
+</ul>
+<pre><code class="yml">---
+# You can apply tags to an entire play.
+- hosts: webservers
+  tags: deploy
+
+  roles:
+    # Tags applied to a role will be applied to tasks in the role.
+    - { role: tomcat, tags: ['tomcat', 'app'] }
+
+  tasks:
+    - name: Notify on completion.
+      local_action:
+        module: osx_say
+        msg: &quot;{{inventory_hostname}} is finished!&quot;
+        voice: Zarvox
+      tags:
+        - notifications
+        - say
+
+    - import_tasks: foo.yml
+      tags: foo
+</code></pre>
+
+<ul>
+<li>if we save the above playbook as <code>tags.yml</code> we can run the below command to only run <code>tomcat</code> role and the <code>Notify on completion</code> task</li>
+</ul>
+<pre><code class="sh">ansible-playbook tags.yml --tags &quot;tmocat,say&quot;
+</code></pre>
+
+<ul>
+<li>if we want to exclude anything tagged with <code>notifications</code> you can use <code>--skip-tags</code></li>
+</ul>
+<pre><code class="sh">ansible-playbook tags.yml --skip-tags &quot;notifications&quot;
+</code></pre>
+
+<ul>
+<li>you can add tags with shorthand option <code>tags: tagname</code> but if adding more than one tag you have to use YAML list syntax</li>
+</ul>
+<pre><code class="yml"># Shorthand list syntax.
+tags: ['one', 'two', 'three']
+
+# Explicit list syntax.
+tags:
+  - one
+  - two
+  - three
+
+# Non-working example.
+tags: one, two, three
+</code></pre>
+
+<h3 id="blocks">Blocks</h3>
+<ul>
+<li>introduced in 2.0.0 blocks allow to group related tasks together and apply task parameters on the block level</li>
+<li>this allows to handle errors insider blocks in a way similar to exception handling</li>
+<li>the following is an example that uses blocks with <code>when</code> to run group of tasks without using <code>when</code> parameters on each task</li>
+</ul>
+<pre><code class="yml">---
+- hosts: web
+  tasks:
+    # Install and configure Apache on RHEL/CentOS hosts.
+    - block:
+        - yum: name=httpd state=present
+        - template: src=httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf
+        - service: name=httpd state=started enabled=yes
+      when: ansible_os_family == 'RedHat'
+      become: yes
+
+    # Install and configure Apache on Debian/Ubuntu hosts.
+    - block:
+        - apt: name=apache2 state=present
+        - template: src=httpd.conf.j2 dest=/etc/apache2/apache2.conf
+        - service: name=apache2 state=started enabled=yes
+      when: ansible_os_family == 'Debian'
+      become: yes
+</code></pre>
+
+<ul>
+<li>you can gracefully handle failures in certain tasks</li>
+</ul>
+<pre><code class="yml">tasks:
+  - block:
+      - name: Script to connect the app to a monitoring service.
+        script: monitoring-connect.sh
+    rescue:
+      - name: This will only run in case of an error in the block.
+        debug: msg=&quot;There was an error in the block.&quot;
+    always:
+      - name: This will always run, no matter what.
+        debug: msg=&quot;This always executes.&quot;
+</code></pre>
+
+<h2 id="chapter-6-playbook-organization-roles-includes-and-imports">Chapter 6 - Playbook Organization - Roles, Includes, and Imports</h2>
+<h3 id="imports">Imports</h3>
+<ul>
+<li>in the <code>tasks</code> section of your playbook you can add <code>import_tasks</code> directives to include tasks</li>
+</ul>
+<pre><code class="yml">  - import_tasks: imported-tasks.yml
+</code></pre>
+
+<ul>
+<li>just like variable include file, tasks are formatted in a flat list in the included file</li>
+</ul>
+<pre><code class="yml">---
+- name: Add profile info for user.
+  copy:
+    src: example_profile
+    dest: &quot;/home/{{ username }}/.profile&quot;
+    owner: &quot;{{ username }}&quot;
+    group: &quot;{{ username }}&quot;
+    mode: 0744
+
+- name: Add private keys for user.
+  copy:
+    src: &quot;{{ item.src }}&quot;
+    dest: &quot;/home/{{ username }}/.ssh/{{ item.dest }}&quot;
+    owner: &quot;{{ username }}&quot;
+    group: &quot;{{ username }}&quot;
+    mode: 0600
+  with_items: &quot;{{ ssh_private_keys }}&quot;
+
+- name: Restart example service.
+  service: name=example state=restarted
+</code></pre>
+
+<ul>
+<li>we used <code>{{ username }}</code> and <code>{{ ssh_private_keys }}</code> variables in this include file instead of hard-coded values so we coule make it reusable`</li>
+<li>you can define variables in you playbook inline variables, or an included file, but also by passing variables directlu into the includes using normal syntax</li>
+</ul>
+<pre><code class="yml">  - import_tasks: user.yml
+    vars:
+      username: johndoe
+      ssh_private_keys:
+        - { src: /path/to/johndoe/key1, dest: id_rsa }
+        - { src: /path/to/johndoe/key2, dest: id_rsa_2 }
+  - import_tasks: user.yml
+    vars:
+      username: janedoe
+      ssh_private_keys:
+        - { src: /path/to/janedoe/key1, dest: id_rsa }
+        - { src: /path/to/janedoe/key2, dest: id_rsa_2 }
+</code></pre>
+
+<ul>
+<li>imported files can even import other files</li>
+</ul>
+<h3 id="includes">Includes</h3>
+<ul>
+<li>if you use <code>import_tasks</code> ansible statically imports the task file as if it were part of the main playbook, once, before the play is executed</li>
+<li>if you ned to have included tasks that are dynamic, i.e. they need to do different things depending on how the rest of the playbook runs, then you can use <code>include_tasks</code></li>
+<li>take for example the following <code>log_paths.yml</code></li>
+</ul>
+<pre><code class="yml">- name: Check for existing log files in dynamic log_file_paths variable.
+  find:
+    paths: &quot;{{ item }}&quot;
+    patterns: '*.log'
+  register: found_log_file_paths
+  with_items: &quot;{{ log_file_paths }}&quot;
+</code></pre>
+
+<ul>
+<li>in this case the <code>log_file_paths</code> variable is set by a task earlier so this include file wouldn't be able to know the value of that vairable until the playbook has partly completed</li>
+<li>when this task file is included, it is done so dynamically</li>
+</ul>
+<pre><code class="yml">- include_tasks: log_paths.yml
+</code></pre>
+
+<blockquote>
+<p><strong>Note:</strong> Early on, Ansible only had static <code>include</code> available for task inclusion, but as playbooks became more complex, people need to be able to include tasks that were processed when run (instead of added to the list of tasks before the play started running). So Ansible 2.1 introduced the <code>static</code> flag for <code>include</code>:. This worked, but overloaded the use of one keyword, so in Ansible 2.4, the use of <code>include</code>: was deprecated and you should use <code>import_tasks</code> if your tasks can basically be inlined before the playbook runs, or <code>include_tasks</code> if the tasks might need to be more dynamic (e.g. registering and reacting to a new registered variable).</p>
+</blockquote>
+<h4 id="dynamic-includes">Dynamic includes</h4>
+<ul>
+<li>until ansible 2.0 you could not use conditional includes as they were processed when your playbook run started</li>
+<li>after 2.0, it evaluates during playbook execution, so you could do something like the following</li>
+</ul>
+<pre><code class="yml"># Include extra tasks file, only if it's present at runtime.
+- name: Check if extra_tasks.yml is present.
+  stat: path=tasks/extra-tasks.yml
+  register: extra_tasks_file
+  connection: local
+
+- include_tasks: tasks/extra-tasks.yml
+  when: extra_tasks_file.stat.exists
+</code></pre>
+
+<ul>
+<li>if the file <code>tasks/extra-tasks.yml is not present, it skips the</code>include_tasks`</li>
+<li>you can even use a <code>with_items</code> loop with includes</li>
+</ul>
+<h4 id="handler-inputs-and-includes">Handler inputs and includes</h4>
+<ul>
+<li>handlers can be imported or included just like tasks, within the <code>handlers</code> section</li>
+</ul>
+<pre><code class="yml">handlers:
+  - import_tasks: handlers.yml
+</code></pre>
+
+<h4 id="playbook-imports">Playbook imports</h4>
+<ul>
+<li>playbooks can be included in other playbooks, using the same <code>import</code> syntax in the top level of playbook</li>
+<li>for playbooks you only have <code>import_playbook</code> available as they cannot be dynamic</li>
+<li>for example if you have two playbooks, you can use the following to run both at the same time</li>
+</ul>
+<pre><code class="yml">- hosts: all
+  remote_user: root
+
+  tasks:
+    [...]
+
+- import_playbook: web.yml
+- import_playbook: db.yml
+</code></pre>
+
+<h4 id="complete-includes-example">Complete includes example</h4>
+<pre><code class="yml">---
+- hosts: all
+
+  vars_files:
+    - vars.yml
+
+  pre_tasks:
+    - name: Update apt cache if needed.
+      apt: update_cache=yes cache_valid_time=3600
+
+  handlers:
+    - import_tasks: handlers/handlers.yml
+
+  tasks:
+    - import_tasks: tasks/common.yml
+    - import_tasks: tasks/apache.yml
+    - import_tasks: tasks/php.yml
+    - import_tasks: tasks/mysql.yml
+    - import_tasks: tasks/composer.yml
+    - import_tasks: tasks/drush.yml
+    - import_tasks: tasks/drupal.yml
+</code></pre>
+
+<pre><code class="yml">---
+# handlers/handlers.yml
+- name: restart apache
+  service: name=apache2 state=restarted
+</code></pre>
+
+<pre><code class="yml">---
+# tasks/drush.yml
+- name: Check out drush 8.x branch.
+  git:
+    repo: https://github.com/drush-ops/drush.git
+    version: 8.x
+    dest: /opt/drush
+
+- name: Install Drush dependencies with Composer.&quot;
+  shell: &gt;
+    /usr/local/bin/composer install
+    chdir=/opt/drush
+    creates=/opt/drush/vendor/autoload.php
+
+- name: Create drush bin symlink.
+  file:
+    src: /opt/drush/drush
+    dest: /usr/local/bin/drush
+    state: link
+</code></pre>
+
+<ul>
+<li>you can't use variables for task indlue file names when using <code>import_tasks</code> like you could with <code>include_vars</code> directives e.g. <code>include_vars: "{{ ansible_os_family }}.yml"</code> as a task or with <code>vars_files</code> </li>
+<li>you can use variables when using <code>include_tasks</code></li>
+</ul>
+<h3 id="roles">Roles</h3>
+<h4 id="role-scaffolding">Role scaffolding</h4>
+<ul>
+<li>instead of requiring you to explicitly include certain files and playbooks in a role, ansible automatically includes any <code>main.yml</code> files inside specific directories that make up the role</li>
+<li>there are only two directories required to make a working ansible role</li>
+</ul>
+<pre><code>role_name
+├── meta
+└── tasks
+</code></pre>
+
+<ul>
+<li>if you create a directory like the one above with a <code>main.yml</code> in each directory, ansible will run all the tasks defined in <code>tasks/main.yml</code> if you call the role from your playbook</li>
+</ul>
+<pre><code class="yml">---
+- hosts: all
+  roles:
+    - role_name
+</code></pre>
+
+<ul>
+<li>your roles can live in the global role path <code>/etc/ansible/ansible.cfg</code> or a <code>roles</code> folder in the same directory as your main playbook</li>
+<li>you can also use <code>ansible-galaxy init role_name</code> to create an example role in the current working directory</li>
+<li>using <code>init</code> ensures the role is structured correctly in case you want to contribute the role to Ansible Galaxy</li>
+</ul>
+<h4 id="building-your-first-role">Building your first role</h4>
+<pre><code>.
+├── Vagrantfile
+├── app
+│   ├── app.js
+│   └── package.json
+├── playbook.yml
+└── roles
+    └── nodejs
+        ├── meta
+        │   └── main.yml
+        └── tasks
+            └── main.yml
+
+5 directories, 6 files
+</code></pre>
+
+<h5 id="vagrantfile_3">Vagrantfile</h5>
+<pre><code class="ruby"># -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = &quot;2&quot;
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = &quot;geerlingguy/centos7&quot;
+  config.vm.network :private_network, ip: &quot;192.168.55.56&quot;
+  config.ssh.insert_key = false
+  config.vm.synced_folder &quot;.&quot;, &quot;/vagrant&quot;, disabled: true
+
+  config.vm.provider :virtualbox do |v|
+    v.memory = 256
+  end
+
+  # Ansible provisioner.
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = &quot;playbook.yml&quot;
+    ansible.become = true
+  end
+end
+</code></pre>
+
+<h5 id="appappjs">app/app.js</h5>
+<pre><code class="javascript">// Simple Express web server.
+// @see http://howtonode.org/getting-started-with-express
+
+// Load the express module.
+var express = require('express');
+var app = express();
+
+// Respond to requests for / with 'Hello World'.
+app.get('/', function(req, res){
+    res.send('Hello World!');
+});
+
+// Listen on port 80 (like a true web server).
+app.listen(80);
+console.log('Express server started successfully.');
+</code></pre>
+
+<h5 id="apppackagejson">app/package.json</h5>
+<pre><code class="json">{
+  &quot;name&quot;: &quot;examplenodeapp&quot;,
+  &quot;description&quot;: &quot;Example Express Node.js app.&quot;,
+  &quot;author&quot;: &quot;Jeff Geerling &lt;geerlingguy@mac.com&gt;&quot;,
+  &quot;dependencies&quot;: {
+    &quot;express&quot;: &quot;4.x&quot;
+  },
+  &quot;engine&quot;: &quot;node &gt;= 0.10.6&quot;
+}
+</code></pre>
+
+<h5 id="playbookyml">playbook.yml</h5>
+<pre><code class="yml">---
+- hosts: all
+
+  vars:
+    node_apps_location: /usr/local/opt/node
+
+  pre_tasks:
+    - name: Import Remi GPG key.
+      rpm_key:
+        key: &quot;https://rpms.remirepo.net/RPM-GPG-KEY-remi&quot;
+        state: present
+
+    - name: Install Remi repo.
+      yum:
+        name: &quot;https://rpms.remirepo.net/enterprise/remi-release-7.rpm&quot;
+        state: present
+
+    - name: Install EPEL repo.
+      yum: name=epel-release state=present
+
+    - name: Ensure firewalld is stopped (since this is a test server).
+      service: name=firewalld state=stopped
+
+  roles:
+    - nodejs
+
+  tasks:
+    - name: Ensure Node.js app folder exists.
+      file: &quot;path={{ node_apps_location }} state=directory&quot;
+
+    - name: Copy example Node.js app to server.
+      copy: &quot;src=app dest={{ node_apps_location }}&quot;
+
+    - name: Install app dependencies defined in package.json.
+      npm: &quot;path={{ node_apps_location }}/app&quot;
+
+    - name: Check list of running Node.js apps.
+      command: forever list
+      register: forever_list
+      changed_when: false
+
+    - name: Start example Node.js app.
+      command: &quot;forever start {{ node_apps_location }}/app/app.js&quot;
+      when: &quot;forever_list.stdout.find(node_apps_location + '/app/app.js') == -1&quot;
+</code></pre>
+
+<h5 id="rolesnodejsmetamainyml">roles/nodejs/meta/main.yml</h5>
+<pre><code class="yml">---
+dependencies: []
+</code></pre>
+
+<h5 id="rolesnodejstasksmainyml">roles/nodejs/tasks/main.yml</h5>
+<pre><code class="yml">---
+- name: Install Node.js (npm plus all its dependencies).
+  yum: name=npm state=present enablerepo=epel
+
+- name: Install forever module (to run our Node.js app).
+  npm: name=forever global=yes state=present
+</code></pre>
+
+<h4 id="more-flexibility-with-role-vars-and-defaults">More flexibility with role vars and defaults</h4>
+<ul>
+<li>to make role more flexible you can make it use a lisrt of npm modules instrad of a hardcoded value, then allow playbooks to provide their own module list variable to override role default list</li>
+<li>when running role tasks, ansible picks up variables defined in role <code>var/smain.yml</code> and <code>defaults/main.yml</code>, but will aloow your playbook to override defaults or other role-provided variables</li>
+<li>modify tasks/main.yml to use a list variable</li>
+</ul>
+<pre><code class="yml">---
+- name: Install Node.js (npm plus all its dependencies).
+  yum: name=npm state=present enablerepo=epel
+
+- name: Install npm modules required by our app.
+  npm: name={{ item }} global=yes state=present
+  with_items: &quot;{{ node_npm_modules }}&quot;
+</code></pre>
+
+<ul>
+<li>let us provide a sane default for new <code>node_npm_modules</code> variable in defaults/main.yml:</li>
+</ul>
+<pre><code class="yml">---
+node_npm_modules:
+  - forever
+</code></pre>
+
+<ul>
+<li>to override this list we can create a new playbook and add a variable (either in <code>vars</code> secion or in an included file via <code>vars_files</code></li>
+</ul>
+<pre><code class="yml">node_npm_modules:
+  - forever
+  - async
+  - request
+</code></pre>
+
+<h3 id="other-role-parts-handlers-files-and-templates">Other role parts: handlers, files, and templates</h3>
+<h4 id="handlers_1">Handlers</h4>
+<ul>
+<li>in a prior example we added a handler to restart apache</li>
+</ul>
+<pre><code class="yml">handlers:
+  - name: restart apache
+    service: name=apache2 state=restarted
+</code></pre>
+
+<ul>
+<li>in roles, handlers are first-class citizens, and you can sotre handlers directly inside a <code>main.yml</code> file inside the role handlers directory <code>handlers/main.yml</code></li>
+</ul>
+<pre><code class="yml">---
+- name: restart apache
+  service: name=apache2 state=restarted
+</code></pre>
+
+<ul>
+<li>you can call handler just like those included directly in your playbook <code>notify: restart apache</code></li>
+</ul>
+<h4 id="files-and-templates">Files and Templates</h4>
+<ul>
+<li>assume the role has been structured with files and templates inside <code>files</code> and <code>templates</code> directories</li>
+</ul>
+<pre><code>roles/
+  example/
+    files/
+      example.conf
+    meta/
+      main.yml
+    templates/
+      example.xml.j2
+    tasks/
+      main.yml
+</code></pre>
+
+<ul>
+<li>when copying a file directly to the server, add the filename or the full path from within a role's files directory, like so:</li>
+</ul>
+<pre><code class="yml">- name: Copy configuration file to server directly.
+  copy:
+    src: example.conf
+    dest: /etc/myapp/example.conf
+    mode: 0644
+</code></pre>
+
+<ul>
+<li>Similarly, when specifying a template, add the filename or the full path from within a role's templates directory, like so:</li>
+</ul>
+<pre><code class="yml">- name: Copy configuration file to server using a template.
+  template:
+    src: example.xml.j2
+    dest: /etc/myapp/example.xml
+    mode: 0644
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../understanding_typescript/" class="btn btn-neutral float-right" title="Understanding Typescript">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../vagrant_recipes/" class="btn btn-neutral" title="Vagrant Recipes"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../vagrant_recipes/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../understanding_typescript/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

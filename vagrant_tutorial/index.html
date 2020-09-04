@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Vagrant Tutorial - Env Docs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Vagrant Tutorial";
+    var mkdocs_page_input_path = "vagrant_tutorial.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Env Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../cheatsheet/">Cheatsheet</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Vagrant Tutorial</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#install">Install</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#project-setup">Project Setup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#boxes">Boxes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#using-a-box">Using a Box</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#up-and-ssh">Up and SSH</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#synced-folders">Synced Folders</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#provisioning">Provisioning</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#installing-apache">Installing apache</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#networking">Networking</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#port-forwarding">Port Forwarding</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#share">Share</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#teardown">Teardown</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#suspending">Suspending</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#halting">Halting</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#destorying">Destorying</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#providers">Providers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#snapshot">Snapshot</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#snapshot-push">Snapshot push</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#snapshot-pop">Snapshot Pop</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#options">Options</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#other-commands">Other commands</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../vagrant_recipes/">Vagrant Recipes</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ansible_for_devops/">Ansible For Devops</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../understanding_typescript/">Understanding Typescript</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../iptables/">Iptables</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Env Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Vagrant Tutorial</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="vagrant-tutorial">Vagrant tutorial</h1>
+<blockquote>
+<p><a href="https://www.vagrantup.com/intro/getting-started">source</a></p>
+</blockquote>
+<h2 id="install">Install</h2>
+<ul>
+<li>Install vagrant via binary package always <a href="https://www.vagrantup.com/downloads.html">link</a></li>
+</ul>
+<pre><code class="sh">sudo apt update
+curl -O https://releases.hashicorp.com/vagrant/2.2.7/vagrant_2.2.7_x86_64.deb
+sudo apt install ./vagrant_2.2.7_x86_64.deb
+vagrant --version
+</code></pre>
+
+<h2 id="project-setup">Project Setup</h2>
+<pre><code class="sh">mkdir &lt;root-project-dir&gt;
+cd &lt;root-project-dir&gt;
+vagrant init hashicorp/bionic64
+</code></pre>
+
+<h2 id="boxes">Boxes</h2>
+<ul>
+<li>vagrant uses base images to quickly clone a virtual machine</li>
+<li>base images are known as "boxes"</li>
+<li>boxes are added to vagrant with <code>vagrant box add</code></li>
+</ul>
+<pre><code class="sh">vagrant box add hashicorp/bionic64
+</code></pre>
+
+<ul>
+<li>this will download box named <strong>hashicorp/bionic64</strong></li>
+<li>boxes are globally stored for current user</li>
+<li>each project uses box as initial image to clone from, but nevet modifies actual base</li>
+</ul>
+<h3 id="using-a-box">Using a Box</h3>
+<ul>
+<li>open <code>VagrantFile</code> and change the contents to the following</li>
+</ul>
+<pre><code class="ruby">Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;hashicorp/bionic64&quot;
+  # optionally specify explicit version of box
+  config.vm.box_version = &quot;1.1.0&quot;
+  # optionally specify url to box directly
+  config.vm.box_url = &quot;https://vagrantcloud.com/hashicorp/bionc64&quot;
+end
+</code></pre>
+
+<ul>
+<li>best place to find more boxes is <a href="https://vagrantcloud.com/boxes/search">HashiCorp's Vagrant Cloud box catalog</a></li>
+</ul>
+<h2 id="up-and-ssh">Up and SSH</h2>
+<pre><code class="sh"># boot vagrant environment
+vagrant up
+
+# ssh into vm
+vagrant ssh
+
+# SSH session can be terminated via &lt;C-d&gt;
+
+# destroy vm
+vagrant destroy
+
+# remove downloaded box
+vagrant box remove
+</code></pre>
+
+<blockquote>
+<p>be careful not to <code>rm -rf /</code> since vagrant shares a directory at <code>/vagrant</code> with directory on host and this can delete all files in shared folder</p>
+</blockquote>
+<h2 id="synced-folders">Synced Folders</h2>
+<ul>
+<li>by default vagrant shares project directory to <code>/vagrant</code> folder</li>
+</ul>
+<h2 id="provisioning">Provisioning</h2>
+<ul>
+<li>vagrant has built in support for <em>automated provisioning</em></li>
+<li>vagrant will automatically install software when you vagrant up</li>
+</ul>
+<h3 id="installing-apache">Installing apache</h3>
+<pre><code class="sh"># bootstap.sh
+#!/usr/bin/env bash
+
+apt-get update
+apt-get install -y apache2
+if ! [ -L /var/www ]; then
+  rm -rf /var/www
+  ln -fs /vagrant /var/www
+fi
+</code></pre>
+
+<pre><code class="ruby">Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;hashicorp/bionic64&quot;
+  config.vm.provision :shell, path: &quot;bootstrap.sh&quot;
+end
+</code></pre>
+
+<ul>
+<li>create machine with <code>vagrant up</code> and vagrant automatically will provision</li>
+<li>if guest machine already running, run <code>vagrant reload --provision</code></li>
+</ul>
+<h2 id="networking">Networking</h2>
+<h3 id="port-forwarding">Port Forwarding</h3>
+<ul>
+<li>Port forwarding allows to specify ports on guest machine to share via a port on host machine</li>
+</ul>
+<pre><code class="ruby">Vagrant.configure(&quot;2&quot;) do |config|
+  config.vm.box = &quot;hashicorp/bionic64&quot;
+  config.vm.provision :shell, path: &quot;bootstrap.sh&quot;
+  config.vm.network :forwarded_port, guest: 80, host: 2567
+end
+</code></pre>
+
+<blockquote>
+<p>See <a href="https://www.vagrantup.com/docs/networking/">more</a></p>
+</blockquote>
+<h2 id="share">Share</h2>
+<ul>
+<li>vagrant shares let you share your environment to anyone who has an internet connection</li>
+<li>will generate a URL that will route directly to your environment</li>
+<li>to install run the following command</li>
+</ul>
+<pre><code class="sh">vagrant plugin install vagrant-share
+</code></pre>
+
+<ul>
+<li>next run the following command</li>
+</ul>
+<pre><code class="sh">vagrant share
+</code></pre>
+
+<h2 id="teardown">Teardown</h2>
+<ul>
+<li>with vagrant you can <em>suspend</em>, <em>halt</em>, or <em>destroy</em></li>
+</ul>
+<h3 id="suspending">Suspending</h3>
+<ul>
+<li><code>vagrant suspend</code></li>
+<li>will save current running state of machine and stop it.</li>
+<li>resume work by calling <code>vagrant up</code></li>
+<li>it is super fast but eats up disk space and requires more to store state of RAM on disk</li>
+</ul>
+<h3 id="halting">Halting</h3>
+<ul>
+<li><code>vagrant halt</code></li>
+<li>will gracefully shut down guest OS and power down guest machine</li>
+<li>user <code>vagrant up</code> to boot up again</li>
+<li>cleanly shuts down machine, preserving contents on disk</li>
+</ul>
+<h3 id="destorying">Destorying</h3>
+<ul>
+<li><code>vagrant destroy</code></li>
+<li>removes all traces of guest machine</li>
+</ul>
+<h2 id="providers">Providers</h2>
+<ul>
+<li>Vagrant can work with a variety of backend providers such as VMware and Hyper-V</li>
+<li>Once you have a provider install you do not need to make any modificaitons to your Vagrantfile</li>
+<li>Use <code>vagrant up</code> with proper provider and vagrant will do the rest</li>
+</ul>
+<pre><code class="sh">vagrant up --provider=vmware_fusion
+</code></pre>
+
+<h2 id="snapshot">Snapshot</h2>
+<ul>
+<li>used to manage snapshots with guest machine</li>
+<li>records point-in-time state of guest machine</li>
+<li>commands include</li>
+<li>push</li>
+<li>pop</li>
+<li>save</li>
+<li>restore</li>
+<li>list</li>
+<li>delete</li>
+</ul>
+<h3 id="snapshot-push">Snapshot push</h3>
+<pre><code class="sh">vagrant snapshot push
+</code></pre>
+
+<ul>
+<li>takes a snapshot and pushes it onto the snapshot stack</li>
+<li>shorthand for <code>vagrant snapshot save</code> where you do not need to specifiy a name</li>
+</ul>
+<blockquote>
+<p><strong>Warning:</strong> if using <code>push</code> and <code>pop</code> avoid using <code>save</code> and <code>restore</code> which are unsafe to mix</p>
+</blockquote>
+<h3 id="snapshot-pop">Snapshot Pop</h3>
+<pre><code class="sh">vagrant snapshot pop
+</code></pre>
+
+<ul>
+<li>will restore pushed state</li>
+</ul>
+<h4 id="options">Options</h4>
+<ul>
+<li><code>--[no-]provision</code> - Force provisioners to run (or prevent them from doing so)</li>
+<li><code>--no-delete</code> - prevents deletion of snapshot after restoring</li>
+<li><code>--no-start</code> - prevent guest from being started after restore</li>
+</ul>
+<h3 id="other-commands">Other commands</h3>
+<pre><code class="sh">vagrant snapshot save [vm-name] NAME
+vagrant snapshot restore [vm-name] NAME
+vagrant snapshot list
+vagrant snapshot delete [vm-name] NAME
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../vagrant_recipes/" class="btn btn-neutral float-right" title="Vagrant Recipes">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../cheatsheet/" class="btn btn-neutral" title="Cheatsheet"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../cheatsheet/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../vagrant_recipes/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
