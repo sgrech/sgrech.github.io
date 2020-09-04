@@ -133,6 +133,20 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#classes-and-interfaces">Classes and Interfaces</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-first-class">Creating a First Class</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#constructor-functions-the-this-keyword">Constructor Functions &amp; The "this" Keyword</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#private-and-private-access-modifiers">"private" and "private" Access Modifiers</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#shorthand-initialization">Shorthand Initialization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#readonly-properties">"readonly" Properties</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -576,6 +590,105 @@ const person = {
 
 const { firstName: userName, age } = person;
 console.log(userName, age);
+</code></pre>
+
+<h2 id="classes-and-interfaces">Classes and Interfaces</h2>
+<h3 id="creating-a-first-class">Creating a First Class</h3>
+<pre><code class="typescript">class Department {
+  name: string = &quot;DEFAULT&quot;;
+
+  constructor(n: string) {
+    this.name = n;
+  }
+}
+
+const accounting = new Department(&quot;Accounting&quot;);
+console.log(accounting);
+</code></pre>
+
+<h3 id="constructor-functions-the-this-keyword">Constructor Functions &amp; The "this" Keyword</h3>
+<pre><code class="typescript">class Department {
+  name: string = &quot;DEFAULT&quot;;
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  // Optional: add extra type safety
+  describe(this: Department) {
+    console.log(&quot;Department: &quot; + this.name);
+  }
+}
+
+const accounting = new Department(&quot;Accounting&quot;);
+
+accounting.describe();
+
+const accountingCopy = { name: &quot;DUMMY&quot;, describe: accounting.describe };
+accountingCopy.describe();
+// this typically refers to the thing which is responsible for calling the method
+</code></pre>
+
+<h3 id="private-and-private-access-modifiers">"private" and "private" Access Modifiers</h3>
+<pre><code class="typescript">class Department {
+  // NOTE: public modifier is default, no need to write
+  public name: string;
+  private employees: string[] = [];
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  describe(this: Department) {
+    console.log(&quot;Department: &quot; + this.name);
+  }
+
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+
+  printEmployeeInformation() {
+    console.log(this.employees.length);
+    console.log(this.employees);
+  }
+}
+
+const accounting = new Department(&quot;Accounting&quot;);
+
+accounting.addEmployee('Max');
+accounting.addEmployee('Manu');
+
+accounting.describe()
+accounting.printEmployeeInformation();
+</code></pre>
+
+<h3 id="shorthand-initialization">Shorthand Initialization</h3>
+<pre><code class="typescript">class Department {
+  constructor(private id: string, public name: string) {}
+
+  describe(this: Department) {
+    console.log(`Department (${this.id}): ` + this.name);
+  }
+}
+
+const accounting = new Department(&quot;acn&quot;, &quot;Accounting&quot;);
+
+accounting.describe();
+</code></pre>
+
+<h3 id="readonly-properties">"readonly" Properties</h3>
+<pre><code class="typescript">class Department {
+  // readonly does not allow reassignment of property
+  constructor(private readonly id: string, public name: string) {}
+
+  describe(this: Department) {
+    console.log(`Department (${this.id}): ` + this.name);
+  }
+}
+
+const accounting = new Department(&quot;acn&quot;, &quot;Accounting&quot;);
+
+accounting.describe();
 </code></pre>
               
             </div>

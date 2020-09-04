@@ -390,7 +390,10 @@ rsync -azP ~/dir1 username@remote_host:destination_directory
 sudo systemctl set-default multi-user.target
 
 # get current systemd target
-sudo systemctl set-default multi-user.target
+sudo systemctl get-default
+
+# get all current active targets
+sudo systemctl list-units --type target --state active
 
 # boot into graphical mode
 sudo systemctl set-default graphical.target
