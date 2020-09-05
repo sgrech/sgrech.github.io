@@ -147,6 +147,10 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#inheritance">Inheritance</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#overriding-properites-the-protected-modifier">Overriding Properites &amp; The "protected" Modifier</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#getters-setters">Getters &amp; Setters</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -728,6 +732,121 @@ it.describe();
 it.printEmployeeInformation();
 
 console.log(it);
+</code></pre>
+
+<h3 id="overriding-properites-the-protected-modifier">Overriding Properites &amp; The "protected" Modifier</h3>
+<pre><code class="typescript">class Department {
+  // private properties cannot be inherited,
+  // if you want them to be inherited they
+  // need to be changed to protected
+  protected employees: string[] = [];
+
+  constructor(private readonly id: string, public name: string) {}
+
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+
+  describe(this: Department) {
+    console.log(`Deparment (${this.id}): ${this.name}`);
+  }
+
+  printEmployeeInformation() {
+    console.log(this.employees.length);
+    console.log(this.employees);
+  }
+}
+
+class AccountingDepartment extends Department {
+  constructor(id: string) {
+    super(id, &quot;Accounting&quot;);
+  }
+
+  addEmployee(name: string) {
+    if (name === &quot;Max&quot;) {
+      return;
+    }
+    this.employees.push(name);
+  }
+}
+
+const accounting = new AccountingDepartment(&quot;d2&quot;);
+
+accounting.addEmployee(&quot;Max&quot;);
+accounting.addEmployee(&quot;Manu&quot;);
+accounting.printEmployeeInformation();
+</code></pre>
+
+<h3 id="getters-setters">Getters &amp; Setters</h3>
+<pre><code class="typescript">class Department {
+  protected employees: string[] = [];
+
+  constructor(private readonly id: string, public name: string) {}
+
+  describe(this: Department) {
+    console.log(`Department (${this.id}): ${this.name}`);
+  }
+
+  addEmployee(employee: string) {
+    this.employees.push(employee);
+  }
+
+  printEmployeeInformation() {
+    console.log(this.employees.length);
+    console.log(this.employees);
+  }
+}
+
+class AccountingDepartment extends Department {
+  private lastReport: string;
+
+  get mostRecentReport() {
+    if (this.lastReport) {
+      return this.lastReport;
+    }
+    throw new Error(&quot;No report found.&quot;);
+  }
+
+  set mostRecentReport(value: string) {
+    if (!value) {
+      throw new Error(&quot;Please pass in a valid value!&quot;);
+    }
+    this.addReport(value);
+  }
+
+  constructor(id: string, private reports: string[]) {
+    super(id, &quot;Accounting&quot;);
+    this.lastReport = reports[0];
+  }
+
+  addEmployee(name: string) {
+    if (name === &quot;Max&quot;) {
+      return;
+    }
+    this.employees.push(name);
+  }
+
+  addReport(text: string) {
+    this.reports.push(text);
+    this.lastReport = text;
+  }
+
+  printReports() {
+    console.log(this.reports);
+  }
+}
+
+const accounting = new AccountingDepartment(&quot;d2&quot;, []);
+
+accounting.mostRecentReport = &quot;Year End Report&quot;;
+accounting.addReport(&quot;Something went wrong...&quot;);
+console.log(accounting.mostRecentReport);
+
+accounting.addEmployee(&quot;Max&quot;);
+accounting.addEmployee(&quot;Manu&quot;);
+
+accounting.printReports();
+accounting.printEmployeeInformation();
 </code></pre>
               
             </div>
