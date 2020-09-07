@@ -151,6 +151,62 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#getters-setters">Getters &amp; Setters</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#static-methods-properties">Static Methods &amp; Properties</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#abstract-classes">Abstract Classes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#singletons-private-constructors">Singletons &amp; Private Constructors</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-first-interface">A First Interface</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-interfaces-with-classes">Using Interfaces with Classes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#readonly-interface-properties">Readonly Interface Properties</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#extending-interfaces">Extending Interfaces</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interfaces-as-function-types">Interfaces as Function Types</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-parameters-properties">Optional Parameters &amp; Properties</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#advanced-types">Advanced Types</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#intersection-types">Intersection Types</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#more-on-type-guards">More on Type Guards</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#discriminated-unions">Discriminated unions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#type-casting">Type Casting</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#index-properties">Index Properties</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-overloads">Function Overloads</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#optional-chaining">Optional Chaining</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#nullish-coalescing">Nullish Coalescing</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#generics">Generics</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#built-in-generics-what-are-generics">Built-in Generics &amp; What are Generics</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-generic-function">Creating a Generic Function</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#working-with-constraints">Working with Constraints</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#another-generic-function">Another Generic Function</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-keyof-constraint">The "keyof" Constraint</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generic-classes">Generic Classes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generic-utility-type">Generic Utility Type</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -847,6 +903,519 @@ accounting.addEmployee(&quot;Manu&quot;);
 
 accounting.printReports();
 accounting.printEmployeeInformation();
+</code></pre>
+
+<h3 id="static-methods-properties">Static Methods &amp; Properties</h3>
+<pre><code class="typescript">class Department {
+  static fiscalYear = 2020;
+  static createEmployee(name: string) {
+    return { name: name };
+  }
+}
+
+const employee1 = Department.createEmployee(&quot;Max&quot;);
+console.log(employee1, Department.fiscalYear);
+</code></pre>
+
+<h3 id="abstract-classes">Abstract Classes</h3>
+<ul>
+<li>Abstract methods present in abstract classes force any inherthing class to create an implementation of that method</li>
+<li>Abstract classes cannot be initiated</li>
+</ul>
+<pre><code class="typescript">abstract class Department {
+  static fiscalYear = 2020;
+
+  constructor(protected readonly id: string, public name: string) {
+  }
+
+
+  abstract describe(this: Department): void;
+}
+
+class ITDepartment extends Department {
+  admins: string[];
+  constructor(id: string, admins: string[]) {
+    super(id, 'IT');
+    this.admins = admins;
+  }
+
+  describe() {
+    console.log('IT Department - ID: ' + this.id);
+  }
+}
+
+const it = new ITDepartment('d1', ['Max']);
+
+it.describe();
+</code></pre>
+
+<h3 id="singletons-private-constructors">Singletons &amp; Private Constructors</h3>
+<pre><code class="typescript">class Department {
+  private static instance: Department;
+  private constructor(protected readonly id: string, public name: string) {
+  }
+
+  static getInstance() {
+    if (Department.instance) {
+      return this.instance;
+    }
+    this.instance = new Department('d2', 'Accounting');
+    return this.instance;
+  }
+
+  static createEmployee(name: string) {
+    return { name: name };
+  }
+}
+
+const accounting = Department.getInstance();
+const accounting2 = Department.getInstance();
+
+console.log(accounting, accounting2);
+</code></pre>
+
+<h3 id="a-first-interface">A First Interface</h3>
+<pre><code class="typescript">interface Person {
+  name: string;
+  age: number;
+
+  greet(phrase: string): void;
+}
+
+let user1: Person;
+
+user1 = {
+  name: &quot;Max&quot;,
+  age: 30,
+  greet(phrase: string) {
+    console.log(phrase + &quot; &quot; + this.name);
+  },
+};
+
+user1.greet(&quot;Hi there - I am&quot;);
+</code></pre>
+
+<h3 id="using-interfaces-with-classes">Using Interfaces with Classes</h3>
+<pre><code class="typescript">interface Greetable {
+  name: string;
+
+  greet(phrase: string): void;
+}
+
+class Person implements Greetable {
+  name: string;
+  age = 30;
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  greet(phrase: string) {
+    console.log(phrase + &quot; &quot; + this.name);
+  }
+}
+
+let user1: Greetable;
+
+user1 = new Person(&quot;Max&quot;);
+
+user1.greet(&quot;Hi there - I am&quot;);
+console.log(user1);
+</code></pre>
+
+<h3 id="readonly-interface-properties">Readonly Interface Properties</h3>
+<ul>
+<li>readonly properties can only be set once</li>
+</ul>
+<pre><code class="typescript">interface Greetable {
+  readonly name: string;
+
+  greet(phrase: string): void;
+}
+</code></pre>
+
+<h3 id="extending-interfaces">Extending Interfaces</h3>
+<pre><code class="typescript">interface Named {
+  readonly name: string;
+}
+
+interface Greetable extends Named {
+  greet(phrase: string): void;
+}
+
+class Person implements Greetable {
+  name: string;
+
+  constructor(n: string) {
+    this.name = n;
+  }
+
+  greet(phrase: string) {
+    console.log(phrase + &quot; &quot; + this.name);
+  }
+}
+</code></pre>
+
+<h3 id="interfaces-as-function-types">Interfaces as Function Types</h3>
+<pre><code class="typescript">// type AddFn = (a: number, b: number) =&gt; number;
+interface AddFn {
+  (a: number, b: number): number;
+}
+
+let add: AddFn;
+
+add = (n1: number, n2: number) =&gt; {
+  return n1 + n2;
+};
+</code></pre>
+
+<h3 id="optional-parameters-properties">Optional Parameters &amp; Properties</h3>
+<pre><code class="typescript">interface Named {
+  readonly name?: string;
+  outputName?: string;
+}
+
+class Person {
+  name?: string;
+
+  constructor(n?: string) {
+    if (n) {
+      this.name = n;
+    }
+  }
+
+  greet(phrase: string) {
+    if (this.name) {
+      console.log(phrase + &quot; &quot; + this.name);
+    } else {
+      console.log(&quot;Hi!&quot;);
+    }
+  }
+}
+</code></pre>
+
+<h2 id="advanced-types">Advanced Types</h2>
+<h3 id="intersection-types">Intersection Types</h3>
+<pre><code class="typescript">type Admin = {
+  name: string;
+  privileges: string[];
+};
+
+type Employee = {
+  name: string;
+  startDate: Date;
+};
+
+// interface ElevatedEmployee extends Employee, Admin {}
+
+type ElevatedEmployee = Admin &amp; Employee;
+
+const e1: ElevatedEmployee = {
+  name: &quot;Max&quot;,
+  privileges: [&quot;create-server&quot;],
+  startDate: new Date(),
+};
+
+type Combinable = string | number;
+type Numeric = number | boolean;
+
+type Universal = Combinable &amp; Numeric;
+</code></pre>
+
+<h3 id="more-on-type-guards">More on Type Guards</h3>
+<pre><code class="typescript">type Admin = {
+  name: string;
+  privileges: string[];
+};
+
+type Employee = {
+  name: string;
+  startDate: Date;
+};
+
+// interface ElevatedEmployee extends Employee, Admin {}
+
+type ElevatedEmployee = Admin &amp; Employee;
+
+const e1: ElevatedEmployee = {
+  name: &quot;Max&quot;,
+  privileges: [&quot;create-server&quot;],
+  startDate: new Date(),
+};
+
+type Combinable = string | number;
+type Numeric = number | boolean;
+
+type Universal = Combinable &amp; Numeric;
+
+function add(a: Combinable, b: Combinable) {
+  // Type guard
+  if (typeof a === &quot;string&quot; || typeof b === &quot;string&quot;) {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+type UnknownEmployee = Employee | Admin;
+
+function printEmployeeInformation(emp: UnknownEmployee) {
+  console.log(&quot;Name: &quot; + emp.name);
+  // Type guard
+  if (&quot;privileges&quot; in emp) {
+    console.log(&quot;Privileges: &quot; + emp.privileges);
+  }
+  // Type guard
+  if (&quot;startDate&quot; in emp) {
+    console.log(&quot;Start Date: &quot; + emp.startDate);
+  }
+}
+
+printEmployeeInformation({ name: &quot;Manu&quot;, startDate: new Date() });
+
+class Car {
+  drive() {
+    console.log(&quot;Driving...&quot;);
+  }
+}
+
+class Truck {
+  drive() {
+    console.log(&quot;Driving a truck...&quot;);
+  }
+
+  loadCargo(amount: number) {
+    console.log(&quot;Loading cargo ...&quot; + amount);
+  }
+}
+
+type Vehicle = Car | Truck;
+
+const v1 = new Car();
+const v2 = new Truck();
+
+function useVehicle(vehicle: Vehicle) {
+  vehicle.drive();
+  // Type Guard
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo(1000);
+  }
+}
+
+useVehicle(v1);
+useVehicle(v2);
+</code></pre>
+
+<h3 id="discriminated-unions">Discriminated unions</h3>
+<pre><code class="typescript">interface Bird {
+  type: &quot;bird&quot;;
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: &quot;horse&quot;;
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case &quot;bird&quot;:
+      speed = animal.flyingSpeed;
+      break;
+    case &quot;horse&quot;:
+      speed = animal.runningSpeed;
+  }
+  console.log(&quot;Moving at speed: &quot; + speed);
+}
+
+moveAnimal({ type: &quot;bird&quot;, flyingSpeed: 10 });
+</code></pre>
+
+<h3 id="type-casting">Type Casting</h3>
+<pre><code class="typescript">// const userInputElement = &lt;HTMLInputElement&gt;document.getElementById('user-input')!;
+const userInputElement = document.getElementById(&quot;user-input&quot;);
+
+if (userInputElement) {
+  (userInputElement as HTMLInputElement).value = &quot;Hi there!&quot;;
+}
+</code></pre>
+
+<h3 id="index-properties">Index Properties</h3>
+<pre><code class="typescript">interface ErrorContainer {
+  // { email: 'Not a valid email', username: 'Must start with a character!' }
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: &quot;Not a valid email!&quot;,
+  username: &quot;Must start with a capital character!&quot;,
+};
+</code></pre>
+
+<h3 id="function-overloads">Function Overloads</h3>
+<pre><code class="typescript">type Combinable = string | number;
+type Numeric = number | boolean;
+
+type Universal = Combinable &amp; Numeric;
+
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: string, b: number): string;
+function add(a: number, b: string): string;
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === &quot;string&quot; || typeof b === &quot;string&quot;) {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+</code></pre>
+
+<h3 id="optional-chaining">Optional Chaining</h3>
+<pre><code class="typescript">const fetchedUserData = {
+  id: &quot;u1&quot;,
+  name: &quot;Max&quot;,
+  job: {
+    title: &quot;CEO&quot;,
+    description: &quot;My own company&quot;,
+  },
+};
+
+console.log(fetchedUserData?.job?.title);
+</code></pre>
+
+<h3 id="nullish-coalescing">Nullish Coalescing</h3>
+<pre><code class="typescript">const userInput = &quot;&quot;;
+
+// Null Coalescing (??) checks if value is null or undefined,
+// but other falsy values are treated as truthy
+const storedData = userInput ?? &quot;DEFAULT&quot;;
+
+console.log(storedData);
+</code></pre>
+
+<h2 id="generics">Generics</h2>
+<h3 id="built-in-generics-what-are-generics">Built-in Generics &amp; What are Generics</h3>
+<pre><code class="typescript">const names: Array&lt;string&gt; = []; // string[]
+
+const promise: Promise&lt;number&gt; = new Promise((resolve) =&gt; {
+  setTimeout(() =&gt; {
+    resolve(10);
+  }, 2000);
+});
+
+promise.then((data) =&gt; console.log(data.toString()));
+</code></pre>
+
+<h3 id="creating-a-generic-function">Creating a Generic Function</h3>
+<pre><code class="typescript">function merge&lt;T, U&gt;(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+
+const mergedObj = merge({ name: &quot;Max&quot;, hobbies: [&quot;Sports&quot;] }, { age: 30 });
+console.log(mergedObj.age);
+</code></pre>
+
+<h3 id="working-with-constraints">Working with Constraints</h3>
+<pre><code class="typescript">function merge&lt;T extends object, U extends object&gt;(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+
+const mergedObj = merge({ name: 'Max', hobbies: ['Sports'] }, { age: 30 });
+console.log(mergedObj);
+</code></pre>
+
+<h3 id="another-generic-function">Another Generic Function</h3>
+<pre><code class="typescript">interface Lengthy {
+  length: number;
+}
+
+// Ensure that object passed has 'length' property
+function countAndDescribe&lt;T extends Lengthy&gt;(element: T): [T, string] {
+  let descriptionText = &quot;Got no value.&quot;;
+  if (element.length === 1) {
+    descriptionText = &quot;Got 1 element.&quot;;
+  } else if (element.length &gt; 1) {
+    descriptionText = &quot;Got &quot; + element.length + &quot; elements.&quot;;
+  }
+  return [element, descriptionText];
+}
+
+console.log(countAndDescribe([&quot;Sports&quot;, &quot;Cooking&quot;]));
+console.log(countAndDescribe(&quot;Hello there!&quot;));
+</code></pre>
+
+<h3 id="the-keyof-constraint">The "keyof" Constraint</h3>
+<pre><code class="typescript">// Constraint ensures that U is a key of T
+function extractAndConvert&lt;T extends object, U extends keyof T&gt;(
+  obj: T,
+  key: U
+) {
+  return 'Value: ' + obj[key];
+}
+
+extractAndConvert({ name: 'Max' }, 'name');
+</code></pre>
+
+<h3 id="generic-classes">Generic Classes</h3>
+<pre><code class="typescript">// constraint to work with primitive types as 
+// removeItem will not work with reference values
+class DataStorage&lt;T extends string | number | boolean&gt; {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return;
+    }
+    this.data.splice(this.data.indexOf(item), 1); // -1
+  }
+
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage&lt;string&gt;();
+textStorage.addItem('Max');
+textStorage.addItem('Manu');
+textStorage.removeItem('Max');
+console.log(textStorage.getItems());
+
+const numberStorage = new DataStorage&lt;number&gt;();
+</code></pre>
+
+<h3 id="generic-utility-type">Generic Utility Type</h3>
+<p><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html">Utility Types Docs</a></p>
+<pre><code class="typescript">interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  // Partial sets required properties in an interface optional
+  let courseGoal: Partial&lt;CourseGoal&gt; = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal;
+}
+
+// Readonly ensures you cannot change properties
+const names: Readonly&lt;string[]&gt; = [&quot;Max&quot;, &quot;Anna&quot;];
+
+// The following won't work
+// names.push('Manu');
+// names.pop();
 </code></pre>
               
             </div>
