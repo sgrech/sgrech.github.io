@@ -209,6 +209,22 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#decorators">Decorators</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-first-class-decorator">A First Class Decorator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#working-with-decorator-factories">Working with Decorator Factories</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#building-more-useful-decorators">Building More Useful Decorators</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-multiple-decorartors">Adding Multiple Decorartors</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#property-accessor-parameter-decorators">Property Accessor &amp; Parameter Decorators</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#returning-and-changing-a-class-in-a-class-decorator">Returning (and changing) a Class in a Class Decorator</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -1416,6 +1432,209 @@ const names: Readonly&lt;string[]&gt; = [&quot;Max&quot;, &quot;Anna&quot;];
 // The following won't work
 // names.push('Manu');
 // names.pop();
+</code></pre>
+
+<h2 id="decorators">Decorators</h2>
+<h3 id="a-first-class-decorator">A First Class Decorator</h3>
+<ul>
+<li>Decorators are applied when your class is defined not when it is instantiated</li>
+</ul>
+<pre><code class="typescript">function Logger(constructor: Function) {
+  console.log('Logging...');
+  console.log(constructor);
+}
+
+@Logger
+class Person {
+  name = 'Max';
+
+  constructor() {
+    console.log('Creating person object...');
+  }
+}
+
+const pers = new Person();
+
+console.log(pers);
+</code></pre>
+
+<h3 id="working-with-decorator-factories">Working with Decorator Factories</h3>
+<pre><code class="typescript">function Logger(logString: string) {
+  return function (constructor: Function) {
+    console.log(logString);
+    console.log(constructor);
+  };
+}
+
+@Logger(&quot;LOGGING - PERSON&quot;)
+class Person {
+  name = &quot;Max&quot;;
+
+  constructor() {
+    console.log(&quot;Creating person object...&quot;);
+  }
+}
+
+const pers = new Person();
+
+console.log(pers);
+</code></pre>
+
+<h3 id="building-more-useful-decorators">Building More Useful Decorators</h3>
+<pre><code class="typescript">function WithTemplate(template: string, hookId: string) {
+  return function (constructor: any) {
+    const hookEl = document.getElementById(hookId);
+    const p = new constructor();
+    if (hookEl) {
+      hookEl.innerHTML = template;
+      hookEl.querySelector(&quot;h1&quot;)!.textContent = p.name;
+    }
+  };
+}
+
+@WithTemplate(&quot;&lt;h1&gt;My Person Object&lt;/h1&gt;&quot;, &quot;app&quot;)
+class Person {
+  name = &quot;Max&quot;;
+
+  constructor() {
+    console.log(&quot;Creating person object...&quot;);
+  }
+}
+
+const pers = new Person();
+
+console.log(pers);
+</code></pre>
+
+<h3 id="adding-multiple-decorartors">Adding Multiple Decorartors</h3>
+<ul>
+<li>with multiple decorators bottom most decorators run first</li>
+</ul>
+<pre><code class="typescript">function Logger(logString: string) {
+  console.log(&quot;LOGGER FACTORY&quot;);
+  return function (constructor: Function) {
+    console.log(logString);
+    console.log(constructor);
+  };
+}
+
+function WithTemplate(template: string, hookId: string) {
+  console.log(&quot;TEMPLATE FACTORY&quot;);
+  return function (constructor: any) {
+    console.log(&quot;Rendering template&quot;);
+    const hookEl = document.getElementById(hookId);
+    const p = new constructor();
+    if (hookEl) {
+      hookEl.innerHTML = template;
+      hookEl.querySelector(&quot;h1&quot;)!.textContent = p.name;
+    }
+  };
+}
+
+@Logger(&quot;LOGGING&quot;)
+@WithTemplate(&quot;&lt;h1&gt;My Person Object&lt;/h1&gt;&quot;, &quot;app&quot;)
+class Person {
+  name = &quot;Max&quot;;
+
+  constructor() {
+    console.log(&quot;Creating person object...&quot;);
+  }
+}
+
+const pers = new Person();
+
+console.log(pers);
+</code></pre>
+
+<h3 id="property-accessor-parameter-decorators">Property Accessor &amp; Parameter Decorators</h3>
+<ul>
+<li>Note that decorators run only when a class is defined, not when it is instantiated</li>
+</ul>
+<pre><code class="typescript">function Log(target: any, propertyName: string | Symbol) {
+  console.log(&quot;Property decorator!&quot;);
+  console.log(target, propertyName);
+}
+
+function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
+  console.log(&quot;Accessor decorator!&quot;);
+  console.log(target);
+  console.log(name);
+  console.log(descriptor);
+}
+
+function Log3(
+  target: any,
+  name: string | Symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log(&quot;Method decorator!&quot;);
+  console.log(target);
+  console.log(name);
+  console.log(descriptor);
+}
+
+function Log4(target: any, name: string | Symbol, position: number) {
+  console.log(&quot;Parameter decorator!&quot;);
+  console.log(target);
+  console.log(name);
+  console.log(position);
+}
+
+class Product {
+  @Log
+  title: string;
+  private _price: number;
+
+  @Log2
+  set price(val: number) {
+    if (val &gt; 0) {
+      this._price = val;
+    } else {
+      throw new Error(&quot;Invalid price - should be positive!&quot;);
+    }
+  }
+
+  constructor(t: string, p: number) {
+    this.title = t;
+    this._price = p;
+  }
+
+  @Log3
+  getPriceWithTax(@Log4 tax: number) {
+    return this._price * (1 + tax);
+  }
+}
+</code></pre>
+
+<h3 id="returning-and-changing-a-class-in-a-class-decorator">Returning (and changing) a Class in a Class Decorator</h3>
+<pre><code class="typescript">// This decorator will override the constructor, thus running at object instantiation
+function WithTemplate(template: string, hookId: string) {
+  console.log(&quot;TEMPLATE FACTORY&quot;);
+  return function &lt;T extends { new (...args: any[]): { name: string } }&gt;(
+    originalConstructor: T
+  ) {
+    return class extends originalConstructor {
+      constructor(..._: any[]) {
+        super();
+        console.log(&quot;Rendering template&quot;);
+        const hookEl = document.getElementById(hookId);
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl.querySelector(&quot;h1&quot;)!.textContent = this.name;
+        }
+      }
+    };
+  };
+}
+
+@WithTemplate(&quot;&lt;h1&gt;My Person Object&lt;/h1&gt;&quot;, &quot;app&quot;)
+class Person {
+  name = &quot;Max&quot;;
+
+  constructor() {
+    console.log(&quot;Creating person object...&quot;);
+  }
+}
 </code></pre>
               
             </div>
